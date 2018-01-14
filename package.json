@@ -1,10 +1,9 @@
 {
-  "name": "level1-template",
+  "name": "platformer-prototype",
   "version": "1.0.0",
   "description": "Template to get started with level1",
   "main": "index.js",
   "scripts": {
-    "l1": "yarn add file:../level1/client && yarn add file:../level1/server",
     "build": "browserify src/client/index.js -o public/bundle.js -t [ babelify ]",
     "watch": "watchify src/client/index.js -o public/bundle.js -t [ babelify ] --debug",
     "start": "nodemon src/server"
@@ -24,7 +23,6 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "l1": "file:../level1/client",
-    "l1-server": "file:../level1/server"
+    "l1": "^0.2.1"
   }
 }

@@ -39,13 +39,14 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   const input = Entity.create('input')
   input.behaviors.scan = scanGamepads()
 
-  const playerId = 'uniqueIdentity'
-  const player2Id = 'uniqueIdentityAgain'
+  const playerId1 = 'player1'
+  const playerId2 = 'player2'
+  const playerId3 = 'player3'
   // this player is targeting itself meaning it will
   // burn itself to death shortly and start spamming the console
-  initPlayer(playerId, playerId, { x: 100, y: 10 }, onDeath(playerId))
-  // lobbyState()
-  initPlayer(player2Id, player2Id, { x: 100, y: 10 }, onDeath(player2Id))
+  initPlayer(playerId1, playerId2, {x: 100, y: 10}, onDeath(playerId1))
+  initPlayer(playerId2, playerId3, {x: 150, y: 10}, onDeath(playerId2))
+  initPlayer(playerId3, playerId1, {x: 500, y: 10}, onDeath(playerId3))
 
   const floor = Entity.create('floor')
   Entity.addBody(floor, Physics.Bodies.rectangle(300, 390, 600, 10, { isStatic: true }))

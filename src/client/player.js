@@ -1,5 +1,6 @@
 import { Entity, Physics } from 'l1'
-import { initImmolationAura } from './immolation-aura'
+
+import { initImmolationAura, formatImmolationTargetType } from './immolation-aura'
 import { initHealth } from './health'
 import move from './move'
 
@@ -14,7 +15,8 @@ const createPlayer = (id, {x, y}) => {
   sprite.anchor.y = 0.65
 
   Entity.addType(player, playerType)
-  Entity.addType(player, 'player ' + id)
+  Entity.addType(player, formatImmolationTargetType(id))
+
   return player
 }
 

@@ -9,7 +9,7 @@ import { initPlayer } from './player'
 
 // import createControllerPresets from './controllerPresets';
 
-Game.init(600, 400, sprites, { debug: true, physics: true }).then(() => {
+Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Game.start()
   Game.getPhysicsEngine().world.gravity.y = 1
 

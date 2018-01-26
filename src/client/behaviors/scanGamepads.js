@@ -1,7 +1,7 @@
-import { Gamepad } from 'l1';
+import { Gamepad } from 'l1'
 
 export default () => ({
   run: () => {
-    Gamepad.run();
+    Gamepad.run()
   },
-});
+})

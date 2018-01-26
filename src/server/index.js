@@ -1,3 +1,3 @@
-const { Server } = require('l1-server');
+const { Server } = require('l1-server')
 
-Server.start({ network: false });
+Server.start({ network: false })

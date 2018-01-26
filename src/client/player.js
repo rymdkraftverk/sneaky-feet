@@ -1,6 +1,7 @@
 import { Entity, Physics } from 'l1'
 
 import { initImmolationAura } from './immolation-aura'
+import { initHealth } from './health'
 
 const spriteName = 'square'
 const playerType = 'playerType'
@@ -18,9 +19,13 @@ const createPlayer = (id, {x, y}) => {
   return player
 }
 
-const initPlayer = (id, targetId, {x, y}) => {
-  createPlayer(id, {x, y})
+const initPlayer = (id, targetId, {x, y}, onDeath) => {
+  const player = createPlayer(id, {x, y})
   initImmolationAura(id, targetId, {x, y})
+
+  player.health = initHealth(onDeath)
+
+  return player
 }
 
 export { initPlayer }

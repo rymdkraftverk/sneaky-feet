@@ -9,6 +9,8 @@ import { initPlayer } from './player'
 
 // import createControllerPresets from './controllerPresets';
 
+const onDeath = playerId => () => console.log(playerId + ' has died')
+
 Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Game.start()
   Game.getPhysicsEngine().world.gravity.y = 1
@@ -19,7 +21,10 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   const input = Entity.create('input')
   input.behaviors.scan = scanGamepads()
 
-  initPlayer('uniqueIdentity', 'targetId', {x: 100, y: 10})
+  const playerId = 'uniqueIdentity'
+  // this player is targeting itself meaning it will
+  // burn itself to death shortly and start spamming the console
+  initPlayer(playerId, playerId, {x: 100, y: 10}, onDeath(playerId))
   menuState()
 
   const floor = Entity.create('floor')

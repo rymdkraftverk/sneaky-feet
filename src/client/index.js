@@ -3,6 +3,7 @@ import 'babel-polyfill'
 import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } from 'l1'
 import sprites from './sprites.json'
 import scanGamepads from './behaviors/scanGamepads'
+import { menuState } from './states'
 
 import { initPlayer } from './player'
 
@@ -19,6 +20,7 @@ Game.init(600, 400, sprites, { debug: true, physics: true }).then(() => {
   input.behaviors.scan = scanGamepads()
 
   initPlayer('uniqueIdentity', {x: 100, y: 10})
+  menuState()
 
   const floor = Entity.create('floor')
   Entity.addBody(floor, Physics.Bodies.rectangle(300, 390, 600, 10, { isStatic: true }))

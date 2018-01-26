@@ -1,17 +1,19 @@
 rules:
   indent:
-    - 2
+    - warn
     - 2
     -
       SwitchCase: 1
   quotes:
-    - 1
+    - warn
     - single
+    -
+      allowTemplateLiterals: true
   linebreak-style:
-    - 1
+    - warn
     - unix
   semi:
-    - 1
+    - warn
     - never
   no-console: 0
   comma-dangle:

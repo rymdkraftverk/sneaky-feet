@@ -1,12 +1,12 @@
 {
-  "name": "platformer-prototype",
-  "version": "1.0.0",
-  "description": "Template to get started with level1",
+  "name": "sneaky-feet",
+  "version": "0.0.1",
+  "description": "Game made for Global game jam 2018",
   "main": "index.js",
   "scripts": {
     "build": "browserify src/client/index.js -o public/bundle.js -t [ babelify ]",
     "watch": "watchify src/client/index.js -o public/bundle.js -t [ babelify ] --debug",
-    "start": "nodemon src/server"
+    "start": "cd public && python -m SimpleHTTPServer"
   },
   "author": "",
   "license": "ISC",
@@ -15,10 +15,6 @@
     "babel-preset-env": "^1.6.1",
     "babelify": "^8.0.0",
     "browserify": "^14.5.0",
-    "eslint": "^4.11.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "nodemon": "^1.12.1",
     "watchify": "^3.9.0"
   },
   "dependencies": {
@@ -26,3 +22,4 @@
     "l1": "^0.2.1"
   }
 }
+

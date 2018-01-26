@@ -1,7 +1,7 @@
 import { Entity, Physics } from 'l1'
-
 import { initImmolationAura } from './immolation-aura'
 import { initHealth } from './health'
+import move from './move'
 
 const spriteName = 'square'
 const playerType = 'playerType'
@@ -15,7 +15,6 @@ const createPlayer = (id, {x, y}) => {
 
   Entity.addType(player, playerType)
   Entity.addType(player, 'player ' + id)
-
   return player
 }
 

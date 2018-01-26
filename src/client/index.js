@@ -3,6 +3,7 @@ import 'babel-polyfill'
 import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } from 'l1'
 import sprites from './sprites.json'
 import scanGamepads from './behaviors/scanGamepads'
+import keys from './keys'
 // import { lobbyState } from './states'
 
 import { initPlayer } from './player'
@@ -23,6 +24,7 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Game.getPhysicsEngine().world.gravity.y = 1
   Debug.toggleHitboxes()
   createBackground()
+  keys()
   // createControllerPresets();
 
   const input = Entity.create('input')

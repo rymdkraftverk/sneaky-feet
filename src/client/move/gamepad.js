@@ -1,16 +1,26 @@
 import { Key, Gamepad, Physics } from 'l1'
-import { axes } from './util/gamepad'
+import { axes } from '../util/gamepad'
+
+const THRESHOLD = 0.2
+
+const checkThreshold = (value) => {
+  return (Math.abs(value) > THRESHOLD)
+}
 
 export default () => ({
   run: (b, e) => {
     const getNewPos = () => {
-      if (Key.isDown('left') || Gamepad.axisDir(0, axes.leftH) && Gamepad.axisDir(0, axes.leftH) > 0.5) {
+      const value = Gamepad.axisDir(0, axes.leftH)
+      if (!value) return null
+      if (!checkThreshold(value)) return null
+
+      if (value < 0) {
         return {
           ...e.body.position,
           x: e.body.position.x - 2,
         }
       }
-      else if (Key.isDown('right') || Gamepad.axisDir(0, axes.leftH) && Gamepad.axisDir(0, axes.leftH) < 0.5) {
+      else if (value > 0) {
         return {
           ...e.body.position,
           x: e.body.position.x + 2,

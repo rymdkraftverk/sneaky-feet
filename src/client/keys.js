@@ -4,6 +4,7 @@ export default () => {
   Key.add('up')
   Key.add('down')
   Key.add('left')
+  Key.add('right')
   Key.add('up')
   Key.add('a')
   Key.add('b')

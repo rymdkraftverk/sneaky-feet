@@ -7,6 +7,7 @@ import keys from './keys'
 // import { lobbyState } from './states'
 
 import { initPlayer } from './player'
+import move from './move'
 
 // import createControllerPresets from './controllerPresets';
 
@@ -44,7 +45,8 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   const playerId3 = 'player3'
   // this player is targeting itself meaning it will
   // burn itself to death shortly and start spamming the console
-  initPlayer(playerId1, playerId2, {x: 100, y: 10}, onDeath(playerId1))
+  const player1 = initPlayer(playerId1, playerId2, {x: 100, y: 10}, onDeath(playerId1))
+  player1.behaviors.move = move()
   initPlayer(playerId2, playerId3, {x: 150, y: 10}, onDeath(playerId2))
   initPlayer(playerId3, playerId1, {x: 500, y: 10}, onDeath(playerId3))
 

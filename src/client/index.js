@@ -14,7 +14,7 @@ const onDeath = playerId => () => console.log(playerId + ' has died')
 Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Game.start()
   Game.getPhysicsEngine().world.gravity.y = 1
-
+  Debug.toggleHitboxes()
   // createControllerPresets();
 
   const input = Entity.create('input')

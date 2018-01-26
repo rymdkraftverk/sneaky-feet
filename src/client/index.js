@@ -28,6 +28,14 @@ const createPortal = () => {
   sprite.scale.set(3.5)
 }
 
+const createTransmissionBall = () => {
+  const entity = Entity.create('transmission-ball')
+  const sprite = Entity.addSprite(entity, 'transmission-ball')
+  sprite.x = 150
+  sprite.y = 100
+  sprite.scale.set(3.5)
+}
+
 Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Game.start()
   Game.getPhysicsEngine().world.gravity.y = 1
@@ -35,6 +43,7 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   createBackground()
   keys()
   createPortal()
+  createTransmissionBall()
   // createControllerPresets();
 
   const input = Entity.create('input')

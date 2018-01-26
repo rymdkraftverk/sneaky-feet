@@ -1,19 +1,18 @@
 import { Entity } from 'l1'
-import menu from './menu'
+import lobby from './lobby'
 
 export const states = {
-  MENU: 'menuState',
+  LOBBY: 'lobbyState',
   BATTLE: 'battleState',
 }
 
 export function battleState() {
-  Entity.getByType(states.MENU).forEach(Entity.destroy)
+  Entity.getByType(states.LOBBY).forEach(Entity.destroy)
 
 }
 
-export function menuState() {
+export function lobbyState() {
   Entity.getByType(states.BATTLE).forEach(Entity.destroy)
 
-  menu()
+  lobby()
 }
-

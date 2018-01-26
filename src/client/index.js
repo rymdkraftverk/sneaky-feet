@@ -3,7 +3,7 @@ import 'babel-polyfill'
 import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } from 'l1'
 import sprites from './sprites.json'
 import scanGamepads from './behaviors/scanGamepads'
-import { menuState } from './states'
+// import { lobbyState } from './states'
 
 import { initPlayer } from './player'
 
@@ -15,7 +15,6 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Game.start()
   Game.getPhysicsEngine().world.gravity.y = 1
 
-  Debug.toggleHitboxes()
   // createControllerPresets();
 
   const input = Entity.create('input')
@@ -25,7 +24,7 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   // this player is targeting itself meaning it will
   // burn itself to death shortly and start spamming the console
   initPlayer(playerId, playerId, {x: 100, y: 10}, onDeath(playerId))
-  menuState()
+  // lobbyState()
 
   const floor = Entity.create('floor')
   Entity.addBody(floor, Physics.Bodies.rectangle(300, 390, 600, 10, { isStatic: true }))

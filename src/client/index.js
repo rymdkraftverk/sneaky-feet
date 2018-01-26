@@ -19,12 +19,21 @@ const createBackground = () => {
   sprite.scale.set(2.5)
 }
 
+const createPortal = () => {
+  const entity = Entity.create('portal')
+  const sprite = Entity.addSprite(entity, 'portal')
+  sprite.x = 100
+  sprite.y = 100
+  sprite.scale.set(3.5)
+}
+
 Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Game.start()
   Game.getPhysicsEngine().world.gravity.y = 1
   Debug.toggleHitboxes()
   createBackground()
   keys()
+  createPortal()
   // createControllerPresets();
 
   const input = Entity.create('input')

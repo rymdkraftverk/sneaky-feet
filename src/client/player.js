@@ -23,7 +23,7 @@ const initPlayer = (id, targetId, {x, y}, onDeath) => {
   initImmolationAura(id, targetId, {x, y})
 
   player.health = initHealth(onDeath)
-
+  player.behaviors.move = move()
   return player
 }
 

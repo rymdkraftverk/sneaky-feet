@@ -19,7 +19,7 @@ Game.init(600, 400, sprites, { debug: true, physics: true }).then(() => {
   const input = Entity.create('input')
   input.behaviors.scan = scanGamepads()
 
-  initPlayer('uniqueIdentity', {x: 100, y: 10})
+  initPlayer('uniqueIdentity', 'targetId', {x: 100, y: 10})
   menuState()
 
   const floor = Entity.create('floor')

@@ -109,6 +109,7 @@ const createHouses = () => {
 export default playerIds => {
   Entity
     .getAll()
+    .filter(({ id }) => id !== 'input')
     .forEach(Entity.destroy)
 
   Entity

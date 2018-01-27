@@ -22,6 +22,14 @@ const createBackground = () => {
   sprite.scale.set(2.5)
 }
 
+const createHouses = () => {
+  const houseOne = Entity.create('house-one')
+  const houseOneSprite = Entity.addSprite(houseOne, 'house-one')
+  houseOneSprite.x = 0
+  houseOneSprite.y = 300
+  houseOneSprite.scale.set(6)
+}
+
 
 const createTransmissionBall = () => {
   const entity = Entity.create('transmission-ball')
@@ -44,6 +52,7 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Game.getPhysicsEngine().world.gravity.y = 1
   Debug.toggleHitboxes()
   createBackground()
+  createHouses()
   keys()
   map()
 

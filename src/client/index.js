@@ -26,11 +26,16 @@ const createBackground = () => {
 const createHouses = () => {
   const houseOne = Entity.create('house-one')
   const houseOneSprite = Entity.addSprite(houseOne, 'house-one')
-  houseOneSprite.x = 0
+  houseOneSprite.x = 100
   houseOneSprite.y = 300
   houseOneSprite.scale.set(6)
-}
 
+  const houseTwo = Entity.create('house-two')
+  const houseTwoSprite = Entity.addSprite(houseTwo, 'house-two')
+  houseTwoSprite.x = 1200
+  houseTwoSprite.y = 108
+  houseTwoSprite.scale.set(6)
+}
 
 const createTransmissionBall = () => {
   const entity = Entity.create('transmission-ball')
@@ -67,7 +72,7 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   createTransmissionWave()
 
   spawn_players(4)
-  fireKnockBack('player3', {x: 1550, y: 300})
+  fireKnockBack('player3', { x: 1550, y: 300 })
 
   collisions()
 })

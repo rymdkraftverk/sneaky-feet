@@ -24,7 +24,7 @@ const player_targets = player_ids => {
   }).reduce(Object.assign)
 }
 
-const player_templates = [
+export const player_templates = [
   {
     id: playerIds.player1,
     x: 400,
@@ -60,13 +60,17 @@ export const spawnPlayers = (activePlayerIds, onDeath) => {
     .filter(template => _.includes(activePlayerIds, template.id))
 
   const targets = player_targets(players.map(x => x.id))
+  const hunters = _.invert(targets)
+
+  console.log('TARGETS:')
+  console.log(targets)
 
   players.forEach((p, index) => {
     const player = initPlayer(
       p.id,
       targets[p.id],
       {x: p.x, y: p.y},
-      onDeath(p.id),
+      onDeath(hunters[p.id]),
       p.animation
     )
     player.behaviors.gamepad = gamepad(index)

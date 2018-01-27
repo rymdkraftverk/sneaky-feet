@@ -96,6 +96,7 @@ export default playerIds => {
     .getAll()
     .forEach(Entity.destroy)
 
+  Game.getPhysicsEngine().world.gravity.y = 1
 
   createBackground()
   createGears()
@@ -115,6 +116,6 @@ export default playerIds => {
 
   //createTransmissionWave()
 
-  spawnPlayers(playerIds, gameOver)
+  spawnPlayers(playerIds, gameOver(playerIds))
   player_targets(5)
 }

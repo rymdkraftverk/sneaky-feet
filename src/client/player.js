@@ -17,7 +17,7 @@ export const player4Walking = ['lizard3-p4', 'lizard4-p4']
 
 const playerType = 'playerType'
 
-const createPlayer = (id, {x, y}, animation) => {
+const createPlayer = (id, {x, y}, animation, scale) => {
   const player = Entity.create(id)
   const sprite = Entity.addAnimation(player, animation, 0.05, { zIndex: 10 })
   Entity.addBody(player, Physics.Bodies.rectangle(x, y, 50, 50, {
@@ -28,7 +28,7 @@ const createPlayer = (id, {x, y}, animation) => {
       mask: categories.default,
     },
   }))
-  sprite.scale.set(5)
+  sprite.scale.set(scale || 5)
   sprite.anchor.y = 0.65
 
   Entity.addType(player, playerType)
@@ -47,4 +47,4 @@ const initPlayer = (id, targetId, {x, y}, onDeath, animation) => {
   return player
 }
 
-export { initPlayer }
+export { initPlayer, createPlayer }

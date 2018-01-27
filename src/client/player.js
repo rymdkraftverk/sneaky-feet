@@ -4,6 +4,7 @@ import { initImmolationAura, formatImmolationTargetType } from './immolation-aur
 import { formatKnockBackTargetType } from './knockback'
 import { initHealth } from './health'
 import { categories } from './collisions'
+import snige_fodder from './snige_fodder'
 
 export const player1Animation = ['lizard1', 'lizard2']
 export const player2Animation = ['lizard1-p2', 'lizard2-p2']
@@ -44,6 +45,7 @@ const initPlayer = (id, targetId, {x, y}, onDeath, animation) => {
   initImmolationAura(id, targetId, {x, y})
 
   player.health = initHealth(onDeath)
+  player.behaviors.snige_fodder = snige_fodder(id)
   return player
 }
 

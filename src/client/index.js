@@ -38,6 +38,14 @@ const createTransmissionBall = () => {
   sprite.scale.set(3.5)
 }
 
+const createTransmissionWave = () => {
+  const entity = Entity.create('transmission-wave-1')
+  const sprite = Entity.addAnimation(entity, ['transmission-wave-1', 'transmission-wave-2', 'transmission-wave-3', 'transmission-wave-4', 'transmission-wave-5'], 0.1)
+  sprite.x = 550
+  sprite.y = 150
+  sprite.scale.set(4.5)
+}
+
 Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Game.start()
   Game.getPhysicsEngine().world.gravity.y = 1
@@ -56,11 +64,12 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   const playerId3 = 'player3'
   // this player is targeting itself meaning it will
   // burn itself to death shortly and start spamming the console
-  const player1 = initPlayer(playerId1, playerId2, {x: 550, y: 100}, onDeath(playerId1))
+  const player1 = initPlayer(playerId1, playerId2, { x: 550, y: 100 }, onDeath(playerId1))
   player1.behaviors.keyboard = keyboard()
   player1.behaviors.gamepad = gamepad()
-  initPlayer(playerId2, playerId3, {x: 410, y: 100}, onDeath(playerId2))
-  initPlayer(playerId3, playerId1, {x: 830, y: 100}, onDeath(playerId3))
+  initPlayer(playerId2, playerId3, { x: 410, y: 100 }, onDeath(playerId2))
+  initPlayer(playerId3, playerId1, { x: 830, y: 100 }, onDeath(playerId3))
+  createTransmissionWave()
 
   map()
 })

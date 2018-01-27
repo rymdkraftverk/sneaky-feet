@@ -1,5 +1,6 @@
 import _ from 'lodash'
 
+import background from './background'
 import block from './block'
 import wall_block from './wall_block'
 import floor_block from './floor_block'
@@ -22,7 +23,7 @@ const resoled_level = level => {
     .filter(([cell]) => cell != ' ')
 }
 
-const init = () => {
+const statics = () => {
   resoled_level(dungeon).forEach(([cell, position], i) => {
     const block_placers = {
       '█': block,
@@ -34,4 +35,7 @@ const init = () => {
   })
 }
 
-export default init
+export default () => {
+  background()
+  statics()
+}

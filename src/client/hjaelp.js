@@ -2,8 +2,8 @@ import { Entity } from 'l1'
 
 export default id => ({
   init: b => {
-    const baloon = Entity.create(`baloon_${id}`)
-    b.sprite = Entity.addSprite(baloon, 'prat-bubble')
+    const baloon = Entity.create(`baloon_hjaelp_${id}`)
+    b.sprite = Entity.addSprite(baloon, 'square')
   },
   run: (b, e) => {
     b.sprite.x = e.sprite.x - e.sprite.width + 100

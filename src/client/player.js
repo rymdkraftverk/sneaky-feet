@@ -9,6 +9,12 @@ export const player1Animation = ['lizard1', 'lizard2']
 export const player2Animation = ['lizard1-p2', 'lizard2-p2']
 export const player3Animation = ['lizard1-p3', 'lizard2-p3']
 export const player4Animation = ['lizard1-p4', 'lizard2-p4']
+
+export const player1Walking = ['lizard3', 'lizard4']
+export const player2Walking = ['lizard3-p2', 'lizard4-p2']
+export const player3Walking = ['lizard3-p3', 'lizard4-p3']
+export const player4Walking = ['lizard3-p4', 'lizard4-p4']
+
 const playerType = 'playerType'
 
 const createPlayer = (id, {x, y}, animation) => {

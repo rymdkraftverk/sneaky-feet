@@ -1,25 +1,23 @@
 import { Key, Gamepad, Physics } from 'l1'
 
-const THRESHOLD = 0.2
-
-const checkThreshold = (value) => {
-  return (Math.abs(value) > THRESHOLD)
-}
-
 export default () => ({
   run: (b, e) => {
     const getNewPos = () => {
       if (Key.isDown('left')) {
+        e.walking = true
         return {
           ...e.body.position,
           x: e.body.position.x - 4,
         }
       }
       else if (Key.isDown('right')) {
+        e.walking = true
         return {
           ...e.body.position,
           x: e.body.position.x + 4,
         }
+      } else {
+        e.walking = false
       }
 
     }

@@ -1,7 +1,7 @@
-import { Entity } from 'l1'
+import { Entity, Game, Util } from 'l1'
 import _ from 'lodash'
 
-import { initPlayer, player1Animation, player2Animation, player3Animation, player4Animation } from './player'
+import { initPlayer, player1Animation, player2Animation, player3Animation, player4Animation, player1Walking, player2Walking, player3Walking, player4Walking } from './player'
 import keyboard from './controls/keyboard'
 import gamepad from './controls/gamepad'
 import attack from './controls/attack'
@@ -30,24 +30,28 @@ const player_templates = [
     x: 400,
     y: 100,
     animation: player1Animation,
+    walkingAnimation: player1Walking,
   },
   {
     id: playerIds.player2,
     x: 600,
     y: 100,
     animation: player2Animation,
+    walkingAnimation: player2Walking,
   },
   {
     id: playerIds.player3,
     x: 800,
     y: 100,
     animation: player3Animation,
+    walkingAnimation: player3Walking,
   },
   {
     id: playerIds.player4,
     x: 1500,
     y: 100,
     animation: player4Animation,
+    walkingAnimation: player4Walking,
   },
 ]
 
@@ -69,6 +73,8 @@ export const spawnPlayers = (activePlayerIds, onDeath) => {
     player.behaviors.attack = attack(index)
     player.behaviors.renderBurn = renderBurn(p.id)
     if(p.id === 'player1') {
+      player.behaviors.renderWalking = renderWalking(p.walkingAnimation)
+      // player.behaviors.renderJump = renderJump(p.id)
       player.behaviors.keyboard = keyboard()
     }
   })
@@ -83,7 +89,6 @@ const renderBurn = (id) => ({
   run: (b, e) => {
     b.sprite.x = e.sprite.x - e.sprite.width / 2
     b.sprite.y = e.sprite.y - e.sprite.height / 2
-    // console.log('e.burn', e.burn)
     if (e.burn) {
       b.sprite.visible = true
     } else {
@@ -91,3 +96,58 @@ const renderBurn = (id) => ({
     }
   },
 })
+
+const renderJump = () => ({
+  jumping: false,
+  init: (b, e) => {
+    b.originalTextures = e.sprite.textures
+    b.jumpSprite = e.sprite.texture[0]
+  },
+  run: (b, e) => {
+    if (!e.onGround && !b.jumping) {
+      b.jumping = true
+      e.sprite.textures = [Game.getTexture('lizard1')]
+    } else if (e.onGround && b.jumping){
+      b.jumping = false
+      e.sprite.textures = ['lizard1', 'lizard2'].map(Game.getTexture)
+      e.sprite.play()
+    }
+    // console.log('b.jumping', b.jumping)
+    // console.log('e.onGround', e.onGrou nd)
+  },
+})
+
+const useWalking = (e, walkingFrames) => {
+  e.sprite.textures = walkingFrames.map(Game.getTexture)
+  e.sprite.play()
+}
+
+const renderWalking = (walkingFrames) => ({
+  walkingLeft: false,
+  walkingRight: false,
+  init: (b, e) => {
+    b.originalTextures = e.sprite.textures
+  },
+  run: (b, e) => {
+    if (e.walking && !b.walkingLeft && !b.walkingRight) {
+      if (e.walking.left && !b.walkingLeft) {
+        useWalking(e, walkingFrames)
+        b.walkingRight = false
+        b.walkingLeft = true
+      } else if (e.walking.right && !b.walkingRight) {
+        useWalking(e, walkingFrames)
+        Util.flipSprite(e.sprite)
+        b.walkingRight = true
+        b.walkingLeft = false
+      }
+
+    } else if (!e.walking && (b.walkingLeft || b.walkingRight)) {
+      e.sprite.textures = b.originalTextures
+      e.sprite.anchor.x = 0.5
+      e.sprite.play()
+      b.walkingLeft = false
+      b.walkingRight = false
+    }
+  },
+})
+

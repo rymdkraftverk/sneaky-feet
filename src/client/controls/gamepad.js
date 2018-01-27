@@ -16,16 +16,23 @@ export default (id) => ({
     const getNewX = () => {
       const value = Gamepad.axisDir(id, axes.leftH)
       if (!value) return null
-      if (!checkThreshold(value)) return null
-
-      if (value < 0) {
-        return -4
-      } else if (value > 0) {
-        return 4
-      } else {
+      if (!checkThreshold(value)) {
+        e.walking = null
         return null
       }
-
+      if (value < THRESHOLD) {
+        e.walking = {
+          left: true,
+          right: false,
+        }
+        return -4
+      } else if (value > THRESHOLD) {
+        e.walking = {
+          left: false,
+          right: true,
+        }
+        return 4
+      }
     }
     
     const getNewY = () => {

@@ -54,6 +54,10 @@ const createTransmissionWave = () => {
 }
 
 Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
+  Sound
+    .getSound('./sound/sneaky_feet.wav', {volue: 0.8, loop: true})
+    .play()
+
   Game.start()
   Game.getPhysicsEngine().world.gravity.y = 1
   Debug.toggleHitboxes()

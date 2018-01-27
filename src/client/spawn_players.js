@@ -1,8 +1,9 @@
 import _ from 'lodash'
 
 import { initPlayer, player1Animation, player2Animation, player3Animation, player4Animation } from './player'
-import keyboard from './move/keyboard'
-import gamepad from './move/gamepad'
+import keyboard from './controls/keyboard'
+import gamepad from './controls/gamepad'
+import attack from './controls/attack'
 
 const onDeath = playerId => () => console.log(playerId + ' has died')
 
@@ -57,6 +58,7 @@ export default n => {
     if(p.id === 'player1') {
       player.behaviors.keyboard = keyboard()
       player.behaviors.gamepad = gamepad()
+      player.behaviors.attack = attack()
     }
   })
 }

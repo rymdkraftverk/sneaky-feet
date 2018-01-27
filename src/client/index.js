@@ -11,6 +11,7 @@ import map from './map'
 import spawn_players from './spawn_players'
 import { fireKnockBack } from './knockback'
 import { createPortalPair } from './portal'
+import attack from './controls/attack'
 
 // import createControllerPresets from './controllerPresets';
 

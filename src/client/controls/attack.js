@@ -1,7 +1,9 @@
-import { Key, Gamepad, Physics, Timer } from 'l1'
-import { axes, buttons } from '../util/gamepad'
+import { Key, Gamepad, Timer } from 'l1'
+import { buttons } from '../util/gamepad'
 import { fireKnockBack } from '../knockback'
 import { playerIds } from '../spawn_players'
+
+const ABILITY_COOLDOWN = 300
 
 const getTarget = (id) => {
   if (Gamepad.isPressed(id, buttons.a) || Key.isDown('a')) return playerIds.player1
@@ -17,7 +19,7 @@ const keyboardCheck = (id) => {
 
 export default (id) => ({
   active: false,
-  cooldown: Timer.create(60),
+  cooldown: Timer.create(ABILITY_COOLDOWN),
   init: (b, e) => {
 
   },

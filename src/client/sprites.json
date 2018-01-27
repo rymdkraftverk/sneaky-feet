@@ -13,5 +13,7 @@
   "transmission-wave-3",
   "transmission-wave-4",
   "transmission-wave-5",
-  "base-platform-block"
+  "base-platform-block",
+  "base-platform-block-rust-1",
+  "base-platform-block-rust-2"
 ]

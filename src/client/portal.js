@@ -9,7 +9,7 @@ const createPortal = (id, x, y) => {
   entity.portalEnabled = true
   const sprite = Entity.addAnimation(entity, animation, 0.05, { zIndex: 10 })
   Entity.addType(entity, playerType)
-  Entity.addBody(entity, Physics.Bodies.rectangle(x, y, 60, 80, { isStatic: true, category: categories.characters } ))
+  Entity.addBody(entity, Physics.Bodies.rectangle(x, y, 60, 80, { isStatic: true, isSensor: true, category: categories.characters } ))
   sprite.x = x
   sprite.y = y
   sprite.scale.set(4)

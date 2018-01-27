@@ -37,7 +37,7 @@ const createTower = () => {
     { zIndex: -160 }
   )
   sprite.x = -400
-  sprite.y = -80
+  sprite.y = -50
   sprite.scale.set(4)
 }
 

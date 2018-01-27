@@ -98,6 +98,5 @@ export default playerIds => {
   createTransmissionWave()
 
   spawnPlayers(playerIds, gameOver)
-  console.log('TARGETS')
-  console.log(player_targets())
+  player_targets(5)
 }

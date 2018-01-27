@@ -76,8 +76,8 @@ export const spawnPlayers = (activePlayerIds, onDeath) => {
     player.behaviors.gamepad = gamepad(index)
     player.behaviors.attack = attack(index)
     player.behaviors.renderBurn = renderBurn(p.id)
+    player.setWalking = makeSetWalking(p.animation, p.walkingAnimation)
     if(p.id === 'player1') {
-      player.setWalking = makeSetWalking(p.animation, p.walkingAnimation)
       // player.behaviors.renderJump = renderJump(p.id)
       player.behaviors.keyboard = keyboard()
     }

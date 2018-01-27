@@ -55,7 +55,7 @@ const createSceneOverlay = () => {
   const sprite = Entity.addSprite(overlay, 'scene-overlay', { zIndex: -100 })
   sprite.x = 0
   sprite.y = 0
-  sprite.alpha = 0.55
+  sprite.alpha = 0.40
   sprite.scale.set(2.5)
 }
 

@@ -41,6 +41,13 @@ const createTower = () => {
   sprite.scale.set(4)
 }
 
+const createHelpBubble = () => {
+  const overlay = Entity.create('test-help-bubble')
+  const sprite = Entity.addSprite(overlay, 'help-bubble')
+  sprite.x = 200
+  sprite.y = 200
+}
+
 const createSceneOverlay = () => {
   const overlay = Entity.create('scene-overlay')
   const sprite = Entity.addSprite(overlay, 'scene-overlay', { zIndex: -100 })
@@ -123,6 +130,7 @@ export default playerIds => {
   createChurch()
   createTower()
   createSceneOverlay()
+  createHelpBubble()
   map()
   portals()
 

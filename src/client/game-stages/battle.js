@@ -1,7 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } from 'l1'
 import sprites from '../sprites.json'
-import scanGamepads from '../behaviors/scanGamepads'
 import keys from '../keys'
 // import { lobbyState } from './states'
 
@@ -148,13 +147,13 @@ export default playerIds => {
   map()
   portals()
 
+  Sound
+    .getSound('./sound/sneaky_feet.wav', { volue: 0.8, loop: true })
+    .play()
+
   // createPortalPair('portal-a', 'portal-b', { ax: 100, ay: 100, bx: 800, by: 300 })
   //createTransmissionBall()
   // createControllerPresets();
-
-  const input = Entity.create('input')
-  input.behaviors.scan = scanGamepads()
-
   //createTransmissionWave()
 
   spawnPlayers(playerIds, gameOver(playerIds))

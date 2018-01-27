@@ -10,6 +10,11 @@ export default targetId => {
   return {
     run: (behavior, stalker) => {
       const target = Entity.get(targetId)
+
+      if(!target) {
+        return
+      }
+
       const forceDirection = normalise(sub(target.body.position, stalker.body.position))
 
       const angle = Util.getAngle(

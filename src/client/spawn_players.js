@@ -5,6 +5,7 @@ import { initPlayer, player1Animation, player2Animation, player3Animation, playe
 import keyboard from './controls/keyboard'
 import gamepad from './controls/gamepad'
 import attack from './controls/attack'
+import lifebar from './behaviors/lifebar'
 
 export const playerIds = {
   player1: 'player1',
@@ -77,6 +78,7 @@ export const spawnPlayers = (activePlayerIds, onDeath) => {
     player.behaviors.attack = attack(index)
     player.behaviors.renderBurn = renderBurn(p.id)
     player.setWalking = makeSetWalking(p.animation, p.walkingAnimation)
+    player.behaviors.lifebar = lifebar(player.sprite, player.sprite.width, 5)
     if(p.id === 'player1') {
       // player.behaviors.renderJump = renderJump(p.id)
       player.behaviors.keyboard = keyboard()

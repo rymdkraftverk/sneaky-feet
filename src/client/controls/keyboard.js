@@ -12,13 +12,13 @@ export default () => ({
       if (Key.isDown('left')) {
         return {
           ...e.body.position,
-          x: e.body.position.x - 2,
+          x: e.body.position.x - 4,
         }
       }
       else if (Key.isDown('right')) {
         return {
           ...e.body.position,
-          x: e.body.position.x + 2,
+          x: e.body.position.x + 4,
         }
       }
 

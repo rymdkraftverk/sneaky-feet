@@ -7,6 +7,10 @@ const checkThreshold = (value) => {
   return (Math.abs(value) > THRESHOLD)
 }
 
+const keyboardCheck = (id) => {
+  return Key.isDown('space') && id === 0
+}
+
 export default (id) => ({
   run: (b, e) => {
     const getNewX = () => {
@@ -25,7 +29,7 @@ export default (id) => ({
     }
     
     const getNewY = () => {
-      if (!Gamepad.isPressed(id, buttons.lb) && e.onGround && (Key.isDown('space') || Gamepad.isPressed(id, buttons.a))) {
+      if (!Gamepad.isPressed(id, buttons.lb) && e.onGround && (keyboardCheck(id) || Gamepad.isPressed(id, buttons.a))) {
         return -12
       } else {
         return null

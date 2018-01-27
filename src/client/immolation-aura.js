@@ -86,6 +86,12 @@ const breathFire = (startingPoint, target) => {
     () => Entity.destroy(projectile)
   )
 
+  // prevent the last projectile from 
+  // being left of on the game over screen
+  setTimeout(() => {
+    Entity.destroy(projectile)
+  }, 125)
+
   projectile.behaviors.stalk = stalk(target.id)
 
   return projectile

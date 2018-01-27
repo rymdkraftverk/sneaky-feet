@@ -1,4 +1,5 @@
 import { Entity, Physics } from 'l1'
+import { categories } from './collisions'
 
 const animation = ['portal']
 const playerType = 'portal'
@@ -8,7 +9,7 @@ const createPortal = (id, x, y) => {
   entity.portalEnabled = true
   const sprite = Entity.addAnimation(entity, animation, 0.05, { zIndex: 10 })
   Entity.addType(entity, playerType)
-  Entity.addBody(entity, Physics.Bodies.rectangle(x, y, 60, 80, { isStatic: true }))
+  Entity.addBody(entity, Physics.Bodies.rectangle(x, y, 60, 80, { isStatic: true, category: categories.characters } ))
   sprite.x = x
   sprite.y = y
   sprite.scale.set(4)
@@ -31,6 +32,7 @@ const portalCollision = (a, b) => {
 
   portal.entity.portalEnabled = false
   portal.entity.portalPair.portalEnabled = false
+  Entity.get('portalCreator').portalsActive = false
 
   const x = portal.entity.portalPair.body.position.x
   const y = portal.entity.portalPair.body.position.y

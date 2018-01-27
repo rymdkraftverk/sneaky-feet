@@ -11,6 +11,7 @@ import player_targets from '../player_targets'
 import { createPortalPair } from '../portal'
 import { gameOver } from './game-over'
 import collisions from '../collisions'
+import portals from '../portals'
 
 // import createControllerPresets from './controllerPresets';
 
@@ -112,8 +113,9 @@ export default playerIds => {
   createSceneOverlay()
   keys()
   map()
+  portals()
 
-  createPortalPair('portal-a', 'portal-b', { ax: 100, ay: 100, bx: 800, by: 300 })
+  // createPortalPair('portal-a', 'portal-b', { ax: 100, ay: 100, bx: 800, by: 300 })
   //createTransmissionBall()
   // createControllerPresets();
 

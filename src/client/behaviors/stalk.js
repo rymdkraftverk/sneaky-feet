@@ -6,19 +6,17 @@ const sub = Physics.Vector.sub
 const mult = Physics.Vector.mult
 const normalise = Physics.Vector.normalise
 
-const forceFactor = 0.005
+const forceFactor = 60
 
 export default targetId => {
-  let triggers = 0
   return {
     run: (behavior, stalker) => {
       const target = Entity.get(targetId)
       const forceDirection = normalise(sub(target.body.position, stalker.body.position))
 
-      triggers++
-      stalker.body.force.x = forceDirection.x * forceFactor
+      Physics.Body.setVelocity(stalker.body, {x: (forceDirection.x * forceFactor), y: (forceDirection.y * forceFactor)})
       // negative force i y-axis to counteract gravity
-      stalker.body.force.y = forceDirection.y * forceFactor - stalker.body.mass * 0.001
+      stalker.body.force.y = stalker.body.mass * 0.001
     },
   }
 }

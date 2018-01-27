@@ -16,7 +16,6 @@ export default targetId => {
 
       if(triggers % 30 == 0) {
         Physics.Body.applyForce(stalker.body, stalker.body.position, mult(diff, forceFactor))
-        console.log(stalker.body.position)
       }
       triggers++
     },

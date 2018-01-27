@@ -77,7 +77,7 @@ export const spawnPlayers = (activePlayerIds, onDeath) => {
     player.behaviors.attack = attack(index)
     player.behaviors.renderBurn = renderBurn(p.id)
     if(p.id === 'player1') {
-      player.behaviors.renderWalking = renderWalking(p.walkingAnimation)
+      player.setWalking = makeSetWalking(p.animation, p.walkingAnimation)
       // player.behaviors.renderJump = renderJump(p.id)
       player.behaviors.keyboard = keyboard()
     }
@@ -116,42 +116,53 @@ const renderJump = () => ({
       e.sprite.textures = ['lizard1', 'lizard2'].map(Game.getTexture)
       e.sprite.play()
     }
-    // console.log('b.jumping', b.jumping)
-    // console.log('e.onGround', e.onGrou nd)
   },
 })
 
-const useWalking = (e, walkingFrames) => {
-  e.sprite.textures = walkingFrames.map(Game.getTexture)
+const useFrames = (e, frames) => {
+  e.sprite.textures = frames.map(Game.getTexture)
   e.sprite.play()
 }
 
-const renderWalking = (walkingFrames) => ({
-  walkingLeft: false,
-  walkingRight: false,
-  init: (b, e) => {
-    b.originalTextures = e.sprite.textures
-  },
-  run: (b, e) => {
-    if (e.walking && !b.walkingLeft && !b.walkingRight) {
-      if (e.walking.left && !b.walkingLeft) {
-        useWalking(e, walkingFrames)
-        b.walkingRight = false
-        b.walkingLeft = true
-      } else if (e.walking.right && !b.walkingRight) {
-        useWalking(e, walkingFrames)
-        Util.flipSprite(e.sprite)
-        b.walkingRight = true
-        b.walkingLeft = false
-      }
+// const renderWalking = (walkingFrames) => ({
+//   walkingLeft: false,
+//   walkingRight: false,
+//   init: (b, e) => {
+//     b.originalTextures = e.sprite.textures
+//   },
+//   run: (b, e) => {
+//     if (e.walkingLeft && !b.walkingLeft) {
+//       useWalking(e, walkingFrames)
+//       b.walkingRight = false
+//       b.walkingLeft = true
+//     } else if (e.walkingRight && !b.walkingRight) {
+//       useWalking(e, walkingFrames)
+//       Util.flipSprite(e.sprite)
+//       b.walkingRight = true
+//       b.walkingLeft = false
+//     } else if ((!e.walkingRight && !e.walkingLeft) && (b.walkingLeft || b.walkingRight)) {
+//       e.sprite.textures = b.originalTextures
+//       e.sprite.anchor.x = 0.5
+//       e.sprite.play()
+//       b.walkingLeft = false
+//       b.walkingRight = false
+//     }
+//   },
+// })
 
-    } else if (!e.walking && (b.walkingLeft || b.walkingRight)) {
-      e.sprite.textures = b.originalTextures
-      e.sprite.anchor.x = 0.5
-      e.sprite.play()
-      b.walkingLeft = false
-      b.walkingRight = false
+const makeSetWalking = (originalFrames, walkingFrames) => (e, direction) => {
+  if (direction === 'left') {
+    useFrames(e, walkingFrames)
+    if (!e.sprite.flipped) {
+      Util.flipSprite(e.sprite)
     }
-  },
-})
-
+  } else if (direction === 'right') {
+    useFrames(e, walkingFrames)
+    if (e.sprite.flipped) {
+      Util.flipSprite(e.sprite)
+    }
+  } else {
+    useFrames(e, originalFrames)
+  }
+  e.sprite.anchor.x = 0.5
+}

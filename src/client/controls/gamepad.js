@@ -17,20 +17,26 @@ export default (id) => ({
       const value = Gamepad.axisDir(id, axes.leftH)
       if (!value) return null
       if (!checkThreshold(value)) {
-        e.walking = null
+        if (e.walkingRight || e.walkingLeft) {
+          e.setWalking(e, null)
+        }
+        e.walkingLeft = false
+        e.walkingRight = false
         return null
       }
       if (value < THRESHOLD) {
-        e.walking = {
-          left: true,
-          right: false,
+        if (!e.walkingLeft) {
+          e.setWalking(e, 'left')
         }
+        e.walkingLeft = true
+        e.walkingRight = false
         return -4
       } else if (value > THRESHOLD) {
-        e.walking = {
-          left: false,
-          right: true,
+        if (!e.walkingRight) {
+          e.setWalking(e, 'right')
         }
+        e.walkingLeft = false
+        e.walkingRight = true
         return 4
       }
     }

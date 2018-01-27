@@ -24,9 +24,10 @@ const renderWinner = id => {
 
 export const gameOver = playerIds => playerId => () => {
   console.log(playerId + ' has won')
-
+  const entitiesToKeep = ['input', 'game-over']
   Entity
     .getAll()
+    .filter(({ id }) => !entitiesToKeep.includes(id))
     .forEach(Entity.destroy)
 
   Game.getPhysicsEngine().world.gravity.y = 0

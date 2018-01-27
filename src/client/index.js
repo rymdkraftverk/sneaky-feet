@@ -55,11 +55,11 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   const playerId3 = 'player3'
   // this player is targeting itself meaning it will
   // burn itself to death shortly and start spamming the console
-  const player1 = initPlayer(playerId1, playerId2, {x: 100, y: 10}, onDeath(playerId1))
+  const player1 = initPlayer(playerId1, playerId2, {x: 550, y: 100}, onDeath(playerId1))
   player1.behaviors.keyboard = keyboard()
   player1.behaviors.gamepad = gamepad()
-  initPlayer(playerId2, playerId3, {x: 150, y: 10}, onDeath(playerId2))
-  initPlayer(playerId3, playerId1, {x: 500, y: 10}, onDeath(playerId3))
+  initPlayer(playerId2, playerId3, {x: 410, y: 100}, onDeath(playerId2))
+  initPlayer(playerId3, playerId1, {x: 830, y: 100}, onDeath(playerId3))
 
   const floor = Entity.create('floor')
   Entity.addBody(floor, Physics.Bodies.rectangle(300, 390, 600, 10, { isStatic: true }))

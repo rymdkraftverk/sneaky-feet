@@ -13,6 +13,8 @@ import portals from '../portals'
 
 // import createControllerPresets from './controllerPresets';
 
+let battleMusic
+
 const createTower = () => {
   const tower = Entity.create('tower-one')
   const sprite = Entity.addAnimation(
@@ -130,9 +132,11 @@ export default playerIds => {
   map()
   portals()
 
-  Sound
-    .getSound('./sound/sneaky_feet.wav', { volue: 0.8, loop: true })
-    .play()
+  if (!battleMusic) {
+    battleMusic = Sound
+      .getSound('./sound/sneaky_feet.wav', { volue: 0.8, loop: true })
+      .play()
+  }
 
   spawnPlayers(playerIds, gameOver(playerIds))
   player_targets(5)

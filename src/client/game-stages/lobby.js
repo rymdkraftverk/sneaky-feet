@@ -13,6 +13,8 @@ const LOBBY_Y = 10
 const LOBBY_OFFSET_X = 550
 const LOBBY_OFFSET_Y = 400
 
+let lobbyMusic
+
 const playersJoined = {
   0: null,
   1: null,
@@ -28,9 +30,8 @@ export default () => {
   const lobbyHandler = Entity.create('lobbyHandler')
   lobbyHandler.behaviors.listeningForInput = listeningForInput()
 
-  Sound
-    .getSound('./sound/lobby_music.wav', { volue: 0.8, loop: true })
-    .play()
+  lobbyMusic = Sound.getSound('./sound/lobby_music.wav', { volue: 0.8, loop: true })
+  lobbyMusic.play()
 }
 
 const createLobbyContainer = (index, x, y) => {
@@ -123,6 +124,7 @@ const checkContinue = () => {
     return;
   }
 
+  lobbyMusic.pause()
   const keys = _.keys(playersThatHaveJoined)
   const ids = _.pick(indexToId, keys)
   battle(_.values(ids))

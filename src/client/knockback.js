@@ -2,7 +2,7 @@ import { Entity, Physics } from 'l1'
 
 import stalk from './behaviors/stalk'
 
-const spriteName = 'square'
+const spriteName = 'transmission-ball'
 
 const add = Physics.Vector.add
 const sub = Physics.Vector.sub
@@ -37,8 +37,9 @@ const knockBack = projectileId => (obj1, obj2) => {
 const createKnockBackProjectile = ({x, y}) => {
   const projectile = Entity.create(Math.random())
   const sprite = Entity.addSprite(projectile, spriteName)
-  Entity.addBody(projectile, Physics.Bodies.circle(x, y, 30, {inertia: Infinity}))
-  sprite.scale.set(5)
+  Entity.addBody(projectile, Physics.Bodies.circle(x, y, 30, {isSensor: true}))
+  //Entity.addBody(projectile, Physics.Bodies.circle(x, y, 30, {inertia: Infinity}))
+  sprite.scale.set(1.5)
   sprite.anchor.y = 0.65
 
   Entity.addType(projectile, formatType(projectile))

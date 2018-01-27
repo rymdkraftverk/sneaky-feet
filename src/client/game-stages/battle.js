@@ -13,6 +13,15 @@ import { gameOver } from './game-over'
 
 // import createControllerPresets from './controllerPresets';
 
+const createSceneOverlay = () => {
+  const overlay = Entity.create('scene-overlay')
+  const sprite = Entity.addSprite(overlay, 'scene-overlay', { zIndex: -100 })
+  sprite.x = 0
+  sprite.y = 0
+  sprite.alpha = 0.2
+  sprite.scale.set(2.5)
+}
+
 const createChurch = () => {
   const church = Entity.create('church-one')
   const churchSprite = Entity.addAnimation(church, ['church-1', 'church-2', 'church-3', 'church-4', 'church-5', 'church-6'], 0.05, { zIndex: -120 })
@@ -23,7 +32,7 @@ const createChurch = () => {
 
 const createBackground = () => {
   const entity = Entity.create('background')
-  const sprite = Entity.addSprite(entity, 'background', { zIndex: -200 })
+  const sprite = Entity.addSprite(entity, 'background', { zIndex: -500 })
   sprite.x = 0
   sprite.y = 0
   sprite.scale.set(2.5)
@@ -46,7 +55,7 @@ const createGears = () => {
 
 const createPowerPlant = () => {
   const powerPlant = Entity.create('power-plant-one')
-  const powerPlantSprite = Entity.addAnimation(powerPlant, ['power-plant-1', 'power-plant-2', 'power-plant-3', 'power-plant-4', 'power-plant-5'], 0.05, { zIndex: -200 })
+  const powerPlantSprite = Entity.addAnimation(powerPlant, ['power-plant-1', 'power-plant-2', 'power-plant-3', 'power-plant-4', 'power-plant-5'], 0.05, { zIndex: -130 })
   powerPlantSprite.x = 528
   powerPlantSprite.y = 350
   powerPlantSprite.scale.set(9)
@@ -93,6 +102,7 @@ export default playerIds => {
   createHouses()
   createPowerPlant()
   createChurch()
+  createSceneOverlay()
   keys()
   map()
 

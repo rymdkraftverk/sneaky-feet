@@ -1,6 +1,7 @@
 import _ from 'lodash'
 
 import block from './block'
+import wall_block from './wall_block'
 import dungeon from './dungeon'
 
 const block_offset = 30
@@ -18,13 +19,18 @@ const resoled_level = level => {
         .map((cell, x) => [cell, block_position(x, y)])
     )
   )
-    .filter(([cell]) => cell === '█')
-    .map(([_cell, b]) => b)
+    .filter(([cell]) => cell != ' ')
 }
 
 const init = () => {
-  resoled_level(dungeon)
-    .forEach((b, i) => { block(i, b) })
+  resoled_level(dungeon).forEach(([cell, position], i) => {
+    const block_placers = {
+      '█': block,
+      '■': wall_block,
+    }
+
+    block_placers[cell](i, position)
+  })
 }
 
 export default init

@@ -5,6 +5,7 @@ import { formatKnockBackTargetType } from './knockback'
 import { initHealth } from './health'
 import { categories } from './collisions'
 import hjaelp from './hjaelp'
+import snige_fodder from './snige_fodder'
 
 export const player1Animation = ['lizard1', 'lizard2']
 export const player2Animation = ['lizard1-p2', 'lizard2-p2']
@@ -46,6 +47,7 @@ const initPlayer = (id, targetId, {x, y}, onDeath, animation) => {
 
   player.health = initHealth(onDeath)
   player.behaviors.hjaelp = hjaelp(id)
+  player.behaviors.snige_fodder = snige_fodder(id)
   return player
 }
 

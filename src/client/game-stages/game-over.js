@@ -1,0 +1,1 @@
+export const gameOver = playerId => () => console.log(playerId + ' has died')

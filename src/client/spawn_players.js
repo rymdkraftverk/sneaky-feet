@@ -15,8 +15,6 @@ export const playerIds = {
 
 const burnFrames = ['fire1', 'fire2', 'fire3']
 
-const onDeath = playerId => () => console.log(playerId + ' has died')
-
 const player_targets = player_ids => {
   const shuffled = _.shuffle(player_ids)
   return shuffled.map((id, i) => {
@@ -53,8 +51,10 @@ const player_templates = [
   },
 ]
 
-export default n => {
-  const players = player_templates.slice(0, n)
+export const spawnPlayers = (activePlayerIds, onDeath) => {
+  const players = player_templates
+    .filter(template => _.includes(activePlayerIds, template.id))
+
   const targets = player_targets(players.map(x => x.id))
 
   players.forEach((p, index) => {

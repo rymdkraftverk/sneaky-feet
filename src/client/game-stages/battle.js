@@ -13,6 +13,15 @@ import portals from '../portals'
 
 let battleMusic
 
+const createClouds = () => {
+  const entity = Entity.create('clouds')
+  const sprite = Entity.addSprite(entity, 'clouds', { zIndex: -260 })
+  sprite.x = 300
+  sprite.y = 100
+  sprite.alpha = 0.4
+  sprite.scale.set(10)
+}
+
 const createTower = () => {
   const tower = Entity.create('tower-one')
   const sprite = Entity.addAnimation(
@@ -117,6 +126,7 @@ export default playerIds => {
   Game.getPhysicsEngine().world.gravity.y = 1
 
   createBackground()
+  createClouds()
   createGears()
   createHouses()
   createPowerPlant()

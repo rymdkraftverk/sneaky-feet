@@ -17,6 +17,7 @@ Game.init(1735, 965, sprites, { debug: true, physics: true }).then(() => {
 
   Game.start()
   Debug.toggleHitboxes()
+  Game.getPhysicsEngine().world.gravity.y = 1
 
   battle(_.values(playerIds))
   collisions()

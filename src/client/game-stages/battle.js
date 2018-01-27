@@ -26,7 +26,7 @@ const createChurch = () => {
   const church = Entity.create('church-one')
   const churchSprite = Entity.addAnimation(church, ['church-1', 'church-2', 'church-3', 'church-4', 'church-5', 'church-6'], 0.05, { zIndex: -120 })
   churchSprite.x = 1270
-  churchSprite.y = 430
+  churchSprite.y = 454
   churchSprite.scale.set(9)
 }
 
@@ -41,14 +41,14 @@ const createBackground = () => {
 const createGears = () => {
   const gear1 = Entity.create('gear1')
   const gear1Sprite = Entity.addSprite(gear1, 'cog-one', { zIndex: -120 })
-  gear1Sprite.x = 450
-  gear1Sprite.y = 650
+  gear1Sprite.x = 410
+  gear1Sprite.y = 750
   gear1Sprite.scale.set(8)
 
   const gear2 = Entity.create('gear2')
   const gear2Sprite = Entity.addSprite(gear2, 'cog-one', { zIndex: -120 })
   gear2Sprite.x = 940
-  gear2Sprite.y = 600
+  gear2Sprite.y = 650
   gear2Sprite.scale.set(10)
 
 }
@@ -56,8 +56,8 @@ const createGears = () => {
 const createPowerPlant = () => {
   const powerPlant = Entity.create('power-plant-one')
   const powerPlantSprite = Entity.addAnimation(powerPlant, ['power-plant-1', 'power-plant-2', 'power-plant-3', 'power-plant-4', 'power-plant-5'], 0.05, { zIndex: -130 })
-  powerPlantSprite.x = 528
-  powerPlantSprite.y = 350
+  powerPlantSprite.x = 500
+  powerPlantSprite.y = 374
   powerPlantSprite.scale.set(9)
 }
 
@@ -65,13 +65,13 @@ const createHouses = () => {
   const houseOne = Entity.create('house-one')
   const houseOneSprite = Entity.addSprite(houseOne, 'house-one', { zIndex: -100 })
   houseOneSprite.x = 100
-  houseOneSprite.y = 300
+  houseOneSprite.y = 350
   houseOneSprite.scale.set(6)
 
   const houseTwo = Entity.create('house-two')
   const houseTwoSprite = Entity.addSprite(houseTwo, 'house-two', { zIndex: -100 })
-  houseTwoSprite.x = 1200
-  houseTwoSprite.y = 108
+  houseTwoSprite.x = 1120
+  houseTwoSprite.y = 158
   houseTwoSprite.scale.set(6)
 }
 

@@ -6,11 +6,11 @@ export const categories = {
 }
 
 export default () => {
-  Entity.addCollision('playerType', ['map_block'], (bodyA) => {
+  Entity.addCollision('playerType', ['floor_block'], (bodyA) => {
     // Player
     bodyA.entity.onGround = true
   })
-  Entity.addCollision('playerType', ['map_block'], (bodyA) => {
+  Entity.addCollision('playerType', ['floor_block'], (bodyA) => {
     // Player
     bodyA.entity.onGround = false
   }, 'collisionEnd')

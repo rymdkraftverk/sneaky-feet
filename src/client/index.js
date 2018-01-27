@@ -7,16 +7,13 @@ import keys from './keys'
 import collisions from './collisions'
 // import { lobbyState } from './states'
 
-import { initPlayer, player1Animation, player2Animation, player3Animation, player4Animation } from './player'
-import keyboard from './move/keyboard'
-import gamepad from './move/gamepad'
 import map from './map'
+import spawn_players from './spawn_players'
 import { fireKnockBack } from './knockback'
 import { createPortalPair } from './portal'
 
 // import createControllerPresets from './controllerPresets';
 
-const onDeath = playerId => () => console.log(playerId + ' has died')
 const createBackground = () => {
   const entity = Entity.create('background')
   const sprite = Entity.addSprite(entity, 'background', { zIndex: -200 })
@@ -48,6 +45,8 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Debug.toggleHitboxes()
   createBackground()
   keys()
+  map()
+
   createPortalPair('portal-a', 'portal-b', { ax: 100, ay: 100, bx: 800, by: 300 })
   createTransmissionBall()
   // createControllerPresets();
@@ -55,22 +54,11 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   const input = Entity.create('input')
   input.behaviors.scan = scanGamepads()
 
-  const playerId1 = 'player1'
-  const playerId2 = 'player2'
-  const playerId3 = 'player3'
-  const playerId4 = 'player4'
-  // this player is targeting itself meaning it will
-  // burn itself to death shortly and start spamming the console
-  const player1 = initPlayer(playerId1, playerId2, { x: 550, y: 100 }, onDeath(playerId1), player1Animation)
-  player1.behaviors.keyboard = keyboard()
-  player1.behaviors.gamepad = gamepad()
-  initPlayer(playerId2, playerId3, { x: 410, y: 100 }, onDeath(playerId2), player2Animation)
-  initPlayer(playerId3, playerId1, { x: 830, y: 100 }, onDeath(playerId3), player3Animation)
-  initPlayer(playerId4, playerId1, { x: 900, y: 100 }, onDeath(playerId3), player4Animation)
   createTransmissionWave()
 
-  map()
-  fireKnockBack(playerId3, { x: 1550, y: 300 })
+  spawn_players(4)
+  fireKnockBack('player3', {x: 1550, y: 300})
+
   collisions()
 })
 

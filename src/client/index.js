@@ -39,7 +39,7 @@ const createGears = () => {
 
 const createPowerPlant = () => {
   const powerPlant = Entity.create('power-plant-one')
-  const powerPlantSprite = Entity.addAnimation(powerPlant, ['power-plant-1', 'power-plant-2', 'power-plant-3', 'power-plant-4', 'power-plant-5'], 0.1, { zIndex: -100 })
+  const powerPlantSprite = Entity.addAnimation(powerPlant, ['power-plant-1', 'power-plant-2', 'power-plant-3', 'power-plant-4', 'power-plant-5'], 0.05, { zIndex: -100 })
   powerPlantSprite.x = 570
   powerPlantSprite.y = 350
   powerPlantSprite.scale.set(9)

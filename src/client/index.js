@@ -12,6 +12,7 @@ import keyboard from './move/keyboard'
 import gamepad from './move/gamepad'
 import map from './map'
 import { fireKnockBack } from './knockback'
+import { createPortalPair } from './portal'
 
 // import createControllerPresets from './controllerPresets';
 
@@ -24,13 +25,6 @@ const createBackground = () => {
   sprite.scale.set(2.5)
 }
 
-const createPortal = () => {
-  const entity = Entity.create('portal')
-  const sprite = Entity.addSprite(entity, 'portal')
-  sprite.x = 100
-  sprite.y = 100
-  sprite.scale.set(3.5)
-}
 
 const createTransmissionBall = () => {
   const entity = Entity.create('transmission-ball')
@@ -54,7 +48,7 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Debug.toggleHitboxes()
   createBackground()
   keys()
-  createPortal()
+  createPortalPair('portal-a', 'portal-b', { ax: 100, ay: 100, bx: 800, by: 300 })
   createTransmissionBall()
   // createControllerPresets();
 
@@ -76,7 +70,7 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   createTransmissionWave()
 
   map()
-  fireKnockBack(playerId3, {x: 1550, y: 300})
+  fireKnockBack(playerId3, { x: 1550, y: 300 })
   collisions()
 })
 

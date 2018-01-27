@@ -3,7 +3,7 @@ import { buttons } from '../util/gamepad'
 import { fireKnockBack } from '../knockback'
 import { playerIds } from '../spawn_players'
 
-const ABILITY_COOLDOWN = 300
+const ABILITY_COOLDOWN = 100
 
 const getTarget = (id) => {
   if (Gamepad.isPressed(id, buttons.a) || Key.isDown('a')) return playerIds.player1

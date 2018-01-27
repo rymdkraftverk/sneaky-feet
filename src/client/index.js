@@ -24,16 +24,16 @@ const createBackground = () => {
 
 const createGears = () => {
   const gear1 = Entity.create('gear1')
-  const gear1Sprite = Entity.addSprite(gear1, 'gear-one')
-  gear1Sprite.x = 50
-  gear1Sprite.y = 805
-  gear1Sprite.scale.set(1.8)
+  const gear1Sprite = Entity.addSprite(gear1, 'cog-one')
+  gear1Sprite.x = 450
+  gear1Sprite.y = 650
+  gear1Sprite.scale.set(8)
 
   const gear2 = Entity.create('gear2')
-  const gear2Sprite = Entity.addSprite(gear2, 'gear-one')
+  const gear2Sprite = Entity.addSprite(gear2, 'cog-one')
   gear2Sprite.x = 940
-  gear2Sprite.y = 767
-  gear2Sprite.scale.set(2.4)
+  gear2Sprite.y = 600
+  gear2Sprite.scale.set(10)
 
 }
 
@@ -69,15 +69,15 @@ const createTransmissionWave = () => {
 
 Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Sound
-    .getSound('./sound/sneaky_feet.wav', {volue: 0.8, loop: true})
+    .getSound('./sound/sneaky_feet.wav', { volue: 0.8, loop: true })
     .play()
 
   Game.start()
   Game.getPhysicsEngine().world.gravity.y = 1
   Debug.toggleHitboxes()
   createBackground()
-  createHouses()
   createGears()
+  createHouses()
   keys()
   map()
 

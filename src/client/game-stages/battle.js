@@ -42,9 +42,9 @@ const createTower = () => {
     0.05,
     { zIndex: -160 }
   )
-  sprite.x = -800
-  sprite.y = -150
-  sprite.scale.set(6)
+  sprite.x = -500
+  sprite.y = -100
+  sprite.scale.set(4.5)
 }
 
 const createSceneOverlay = () => {
@@ -52,7 +52,7 @@ const createSceneOverlay = () => {
   const sprite = Entity.addSprite(overlay, 'scene-overlay', { zIndex: -100 })
   sprite.x = 0
   sprite.y = 0
-  sprite.alpha = 0.3
+  sprite.alpha = 0.55
   sprite.scale.set(2.5)
 }
 

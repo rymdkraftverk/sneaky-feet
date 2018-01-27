@@ -4,6 +4,7 @@ import _ from 'lodash'
 import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } from 'l1'
 import sprites from './sprites.json'
 import battle from './game-stages/battle'
+import collisions from './collisions'
 
 import { playerIds } from './spawn_players'
 
@@ -19,5 +20,6 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Debug.toggleHitboxes()
 
   battle(_.values(playerIds))
+  collisions()
 })
 

@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
 import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } from 'l1'
-import sprites from '../sprites.json'
 import keys from '../keys'
 // import { lobbyState } from './states'
 
@@ -8,7 +7,6 @@ import map from '../map'
 import border_patrol from '../border_patrol'
 import { spawnPlayers } from '../spawn_players'
 import player_targets from '../player_targets'
-import { createPortalPair } from '../portal'
 import { gameOver } from './game-over'
 import collisions from '../collisions'
 import portals from '../portals'
@@ -108,22 +106,6 @@ const createHouses = () => {
   houseTwoSprite.scale.set(6)
 }
 
-const createTransmissionBall = () => {
-  const entity = Entity.create('transmission-ball')
-  const sprite = Entity.addSprite(entity, 'transmission-ball')
-  sprite.x = 150
-  sprite.y = 100
-  sprite.scale.set(3.5)
-}
-
-const createTransmissionWave = () => {
-  const entity = Entity.create('transmission-wave-1')
-  const sprite = Entity.addAnimation(entity, ['transmission-wave-1', 'transmission-wave-2', 'transmission-wave-3', 'transmission-wave-4', 'transmission-wave-5'], 0.1)
-  sprite.x = 550
-  sprite.y = 150
-  sprite.scale.set(4.5)
-}
-
 export default playerIds => {
   Entity
     .getAll()
@@ -150,11 +132,6 @@ export default playerIds => {
   Sound
     .getSound('./sound/sneaky_feet.wav', { volue: 0.8, loop: true })
     .play()
-
-  // createPortalPair('portal-a', 'portal-b', { ax: 100, ay: 100, bx: 800, by: 300 })
-  //createTransmissionBall()
-  // createControllerPresets();
-  //createTransmissionWave()
 
   spawnPlayers(playerIds, gameOver(playerIds))
   player_targets(5)

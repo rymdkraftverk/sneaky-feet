@@ -87,7 +87,7 @@ export const spawnPlayers = (activePlayerIds, onDeath) => {
 }
 
 const renderBurn = (id) => ({
-  init: (b, e) => {
+  init: b => {
     const burn = Entity.create(`${id}Burn`)
     b.sprite = Entity.addAnimation(burn, burnFrames, 0.05, { zIndex: 100} )
     b.sprite.scale.set(4)
@@ -103,23 +103,23 @@ const renderBurn = (id) => ({
   },
 })
 
-const renderJump = () => ({
-  jumping: false,
-  init: (b, e) => {
-    b.originalTextures = e.sprite.textures
-    b.jumpSprite = e.sprite.texture[0]
-  },
-  run: (b, e) => {
-    if (!e.onGround && !b.jumping) {
-      b.jumping = true
-      e.sprite.textures = [Game.getTexture('lizard1')]
-    } else if (e.onGround && b.jumping){
-      b.jumping = false
-      e.sprite.textures = ['lizard1', 'lizard2'].map(Game.getTexture)
-      e.sprite.play()
-    }
-  },
-})
+// const renderJump = () => ({
+//   jumping: false,
+//   init: (b, e) => {
+//     b.originalTextures = e.sprite.textures
+//     b.jumpSprite = e.sprite.texture[0]
+//   },
+//   run: (b, e) => {
+//     if (!e.onGround && !b.jumping) {
+//       b.jumping = true
+//       e.sprite.textures = [Game.getTexture('lizard1')]
+//     } else if (e.onGround && b.jumping){
+//       b.jumping = false
+//       e.sprite.textures = ['lizard1', 'lizard2'].map(Game.getTexture)
+//       e.sprite.play()
+//     }
+//   },
+// })
 
 const useFrames = (e, frames) => {
   e.sprite.textures = frames.map(Game.getTexture)

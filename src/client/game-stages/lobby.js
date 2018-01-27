@@ -50,7 +50,7 @@ const createLobbyContainer = (index, x, y) => {
 const checkPlayerJoined = (id) => {
   if (!playersJoined[id] && Gamepad.isPressed(id, buttons.a)) {
     playersJoined[id] = true;
-    
+
     [Entity.get(`a-button${id}`), Entity.get(`pressToJoinText${id}`)].forEach(Entity.destroy)
 
     console.log('player joined: ', id)

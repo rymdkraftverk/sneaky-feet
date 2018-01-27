@@ -9,7 +9,9 @@ const playerType = 'playerType'
 const createPlayer = (id, {x, y}) => {
   const player = Entity.create(id)
   const sprite = Entity.addSprite(player, spriteName)
-  Entity.addBody(player, Physics.Bodies.rectangle(x, y, 80, 80))
+  Entity.addBody(player, Physics.Bodies.rectangle(x, y, 80, 80, {
+    inertia: Infinity,
+  }))
   sprite.scale.set(5)
   sprite.anchor.y = 0.65
 

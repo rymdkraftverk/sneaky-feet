@@ -2,6 +2,7 @@ import _ from 'lodash'
 
 import block from './block'
 import wall_block from './wall_block'
+import floor_block from './floor_block'
 import dungeon from './dungeon'
 
 const block_offset = 30
@@ -27,6 +28,7 @@ const init = () => {
     const block_placers = {
       '█': block,
       '■': wall_block,
+      '▬': floor_block,
     }
 
     block_placers[cell](i, position)

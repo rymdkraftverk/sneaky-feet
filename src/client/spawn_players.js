@@ -1,3 +1,4 @@
+import { Entity } from 'l1'
 import _ from 'lodash'
 
 import { initPlayer, player1Animation, player2Animation, player3Animation, player4Animation } from './player'
@@ -11,6 +12,8 @@ export const playerIds = {
   player3: 'player3',
   player4: 'player4',
 }
+
+const burnFrames = ['fire1', 'fire2', 'fire3']
 
 const onDeath = playerId => () => console.log(playerId + ' has died')
 
@@ -64,8 +67,27 @@ export default n => {
     )
     player.behaviors.gamepad = gamepad(index)
     player.behaviors.attack = attack(index)
+    player.behaviors.renderBurn = renderBurn(p.id)
     if(p.id === 'player1') {
       player.behaviors.keyboard = keyboard()
     }
   })
 }
+
+const renderBurn = (id) => ({
+  init: (b, e) => {
+    const burn = Entity.create(`${id}Burn`)
+    b.sprite = Entity.addAnimation(burn, burnFrames, 0.05, { zIndex: 100} )
+    b.sprite.scale.set(4)
+  },
+  run: (b, e) => {
+    b.sprite.x = e.sprite.x - e.sprite.width / 2
+    b.sprite.y = e.sprite.y - e.sprite.height / 2
+    // console.log('e.burn', e.burn)
+    if (e.burn) {
+      b.sprite.visible = true
+    } else {
+      b.sprite.visible = false
+    }
+  },
+})

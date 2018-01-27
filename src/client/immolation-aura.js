@@ -8,7 +8,7 @@ const immolationType = 'immolationType'
 const immolationIdPrefix = 'immolation '
 const radius = 80
 
-const burnDps = -10
+const burnDps = -30
 const ticksPerSec = 60
 const dmgPerTick = burnDps / ticksPerSec
 
@@ -34,6 +34,13 @@ const initImmolationAura = (ownerId, targetId, {x, y}) => {
     burn
   )
 
+  Entity.addCollision(
+    formatImmolationType(ownerId),
+    formatImmolationTargetType(targetId),
+    stopBurn,
+    'collisionEnd'
+  )
+
   return immolation
 }
 
@@ -47,8 +54,19 @@ const burn = (obj1, obj2) => {
   if(obj1.entity.health)
   {
     obj1.entity.health = updateHealth(obj1.entity.health, dmgPerTick)
+    obj1.entity.burn = true
   } else {
     obj2.entity.health = updateHealth(obj2.entity.health, dmgPerTick)
+    obj2.entity.burn = true
+  }
+}
+
+const stopBurn = (obj1, obj2) => {
+  if(obj1.entity.health)
+  {
+    obj1.entity.burn = false
+  } else {
+    obj2.entity.burn = false
   }
 }
 

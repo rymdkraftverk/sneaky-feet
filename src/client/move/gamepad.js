@@ -26,8 +26,8 @@ export default () => ({
     }
     
     const getNewY = () => {
-      if (Key.isDown('space') || Gamepad.isPressed(GAMEPAD_ID, buttons.a)) {
-        return -5
+      if (e.onGround && (Key.isDown('space') || Gamepad.isPressed(GAMEPAD_ID, buttons.a))) {
+        return -10
       } else {
         return null
       }

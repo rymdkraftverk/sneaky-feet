@@ -4,6 +4,7 @@ import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } f
 import sprites from './sprites.json'
 import scanGamepads from './behaviors/scanGamepads'
 import keys from './keys'
+import collisions from './collisions'
 // import { lobbyState } from './states'
 
 import { initPlayer } from './player'
@@ -74,4 +75,6 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
 
   map()
   fireKnockBack(playerId3, {x: 1550, y: 300})
+  collisions()
 })
+

@@ -5,6 +5,13 @@ import keyboard from './controls/keyboard'
 import gamepad from './controls/gamepad'
 import attack from './controls/attack'
 
+export const playerIds = {
+  player1: 'player1',
+  player2: 'player2',
+  player3: 'player3',
+  player4: 'player4',
+}
+
 const onDeath = playerId => () => console.log(playerId + ' has died')
 
 const player_targets = player_ids => {
@@ -18,25 +25,25 @@ const player_targets = player_ids => {
 
 const player_templates = [
   {
-    id: 'player1',
+    id: playerIds.player1,
     x: 400,
     y: 100,
     animation: player1Animation,
   },
   {
-    id: 'player2',
+    id: playerIds.player2,
     x: 600,
     y: 100,
     animation: player2Animation,
   },
   {
-    id: 'player3',
+    id: playerIds.player3,
     x: 800,
     y: 100,
     animation: player3Animation,
   },
   {
-    id: 'player4',
+    id: playerIds.player4,
     x: 1500,
     y: 100,
     animation: player4Animation,

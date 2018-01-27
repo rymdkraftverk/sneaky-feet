@@ -1,11 +1,12 @@
 import { Key, Gamepad, Physics, Timer } from 'l1'
 import { axes, buttons } from '../util/gamepad'
+import { playerIds } from '../spawn_players'
 
 const getTarget = (id) => {
-  if (Gamepad.isPressed(id, buttons.a)) return 'playerGreen'
-  if (Gamepad.isPressed(id, buttons.b)) return 'playerRed'
-  if (Gamepad.isPressed(id, buttons.x)) return 'playerBlue'
-  if (Gamepad.isPressed(id, buttons.y)) return 'playerYellow'
+  if (Gamepad.isPressed(id, buttons.a)) return playerIds.player1
+  if (Gamepad.isPressed(id, buttons.b)) return playerIds.player2
+  if (Gamepad.isPressed(id, buttons.x)) return playerIds.player3
+  if (Gamepad.isPressed(id, buttons.y)) return playerIds.player4
 }
 
 export default (id) => ({

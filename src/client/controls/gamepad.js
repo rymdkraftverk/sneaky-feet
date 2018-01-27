@@ -2,16 +2,15 @@ import { Key, Gamepad, Physics } from 'l1'
 import { axes, buttons } from '../util/gamepad'
 
 const THRESHOLD = 0.2
-const GAMEPAD_ID = 0
 
 const checkThreshold = (value) => {
   return (Math.abs(value) > THRESHOLD)
 }
 
-export default () => ({
+export default (id) => ({
   run: (b, e) => {
     const getNewX = () => {
-      const value = Gamepad.axisDir(GAMEPAD_ID, axes.leftH)
+      const value = Gamepad.axisDir(id, axes.leftH)
       if (!value) return null
       if (!checkThreshold(value)) return null
 
@@ -26,7 +25,7 @@ export default () => ({
     }
     
     const getNewY = () => {
-      if (!Gamepad.isPressed(0, buttons.lb) && e.onGround && (Key.isDown('space') || Gamepad.isPressed(GAMEPAD_ID, buttons.a))) {
+      if (!Gamepad.isPressed(id, buttons.lb) && e.onGround && (Key.isDown('space') || Gamepad.isPressed(id, buttons.a))) {
         return -12
       } else {
         return null

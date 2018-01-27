@@ -47,7 +47,7 @@ export default n => {
   const players = player_templates.slice(0, n)
   const targets = player_targets(players.map(x => x.id))
 
-  players.forEach(p => {
+  players.forEach((p, index) => {
     const player = initPlayer(
       p.id,
       targets[p.id],
@@ -55,10 +55,10 @@ export default n => {
       onDeath(p.id),
       p.animation
     )
+    player.behaviors.gamepad = gamepad(index)
+    player.behaviors.attack = attack(index)
     if(p.id === 'player1') {
       player.behaviors.keyboard = keyboard()
-      player.behaviors.gamepad = gamepad()
-      player.behaviors.attack = attack()
     }
   })
 }

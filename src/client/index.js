@@ -10,6 +10,7 @@ import { initPlayer } from './player'
 import keyboard from './move/keyboard'
 import gamepad from './move/gamepad'
 import map from './map'
+import { fireKnockBack } from './knockback'
 
 // import createControllerPresets from './controllerPresets';
 
@@ -72,4 +73,5 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   createTransmissionWave()
 
   map()
+  fireKnockBack(playerId3, {x: 1550, y: 300})
 })

@@ -1,6 +1,7 @@
 import { Entity, Physics } from 'l1'
 
 import { initImmolationAura, formatImmolationTargetType } from './immolation-aura'
+import { formatKnockBackTargetType } from './knockback'
 import { initHealth } from './health'
 
 const animation = ['lizard1', 'lizard2']
@@ -17,6 +18,7 @@ const createPlayer = (id, {x, y}) => {
 
   Entity.addType(player, playerType)
   Entity.addType(player, formatImmolationTargetType(id))
+  Entity.addType(player, formatKnockBackTargetType(id))
 
   return player
 }

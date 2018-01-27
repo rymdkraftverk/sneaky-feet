@@ -45,7 +45,7 @@ const createHouses = () => {
   houseOneSprite.scale.set(6)
 
   const houseTwo = Entity.create('house-two')
-  const houseTwoSprite = Entity.addSprite(houseTwo, 'house-two')
+  const houseTwoSprite = Entity.addSprite(houseTwo, 'house-two', { zIndex: -100 })
   houseTwoSprite.x = 1200
   houseTwoSprite.y = 108
   houseTwoSprite.scale.set(6)

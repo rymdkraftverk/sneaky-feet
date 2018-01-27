@@ -9,12 +9,7 @@ import collisions from './collisions'
 
 import map from './map'
 import spawn_players from './spawn_players'
-<<<<<<< HEAD
-// import { fireKnockBack } from './knockback'
-=======
 import player_targets from './player_targets'
-import { fireKnockBack } from './knockback'
->>>>>>> Log player targets
 import { createPortalPair } from './portal'
 
 // import createControllerPresets from './controllerPresets';

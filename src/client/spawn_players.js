@@ -20,7 +20,7 @@ const player_targets = player_ids => {
     const target_index = i === (player_ids.length - 1) ? 0 : i + 1
     const t = shuffled[target_index]
     return {[id]: t}
-  })
+  }).reduce(Object.assign)
 }
 
 const player_templates = [

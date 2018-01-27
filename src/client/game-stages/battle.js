@@ -15,6 +15,14 @@ import portals from '../portals'
 
 // import createControllerPresets from './controllerPresets';
 
+const createBubble = () => {
+  const entity = Entity.create('test-prat-bubble')
+  const sprite = Entity.addSprite(entity, 'prat-bubble')
+  sprite.x = 500
+  sprite.y = 200
+  sprite.scale.set(0.95)
+}
+
 const createTower = () => {
   const tower = Entity.create('tower-one')
   const sprite = Entity.addAnimation(
@@ -143,6 +151,7 @@ export default playerIds => {
   createChurch()
   createTower()
   createSceneOverlay()
+  createBubble()
   keys()
   map()
   portals()

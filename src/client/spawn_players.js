@@ -103,54 +103,10 @@ const renderBurn = (id) => ({
   },
 })
 
-// const renderJump = () => ({
-//   jumping: false,
-//   init: (b, e) => {
-//     b.originalTextures = e.sprite.textures
-//     b.jumpSprite = e.sprite.texture[0]
-//   },
-//   run: (b, e) => {
-//     if (!e.onGround && !b.jumping) {
-//       b.jumping = true
-//       e.sprite.textures = [Game.getTexture('lizard1')]
-//     } else if (e.onGround && b.jumping){
-//       b.jumping = false
-//       e.sprite.textures = ['lizard1', 'lizard2'].map(Game.getTexture)
-//       e.sprite.play()
-//     }
-//   },
-// })
-
 const useFrames = (e, frames) => {
   e.sprite.textures = frames.map(Game.getTexture)
   e.sprite.play()
 }
-
-// const renderWalking = (walkingFrames) => ({
-//   walkingLeft: false,
-//   walkingRight: false,
-//   init: (b, e) => {
-//     b.originalTextures = e.sprite.textures
-//   },
-//   run: (b, e) => {
-//     if (e.walkingLeft && !b.walkingLeft) {
-//       useWalking(e, walkingFrames)
-//       b.walkingRight = false
-//       b.walkingLeft = true
-//     } else if (e.walkingRight && !b.walkingRight) {
-//       useWalking(e, walkingFrames)
-//       Util.flipSprite(e.sprite)
-//       b.walkingRight = true
-//       b.walkingLeft = false
-//     } else if ((!e.walkingRight && !e.walkingLeft) && (b.walkingLeft || b.walkingRight)) {
-//       e.sprite.textures = b.originalTextures
-//       e.sprite.anchor.x = 0.5
-//       e.sprite.play()
-//       b.walkingLeft = false
-//       b.walkingRight = false
-//     }
-//   },
-// })
 
 const makeSetWalking = (originalFrames, walkingFrames) => (e, direction) => {
   if (direction === 'left') {

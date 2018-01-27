@@ -9,7 +9,12 @@ import collisions from './collisions'
 
 import map from './map'
 import spawn_players from './spawn_players'
+<<<<<<< HEAD
 // import { fireKnockBack } from './knockback'
+=======
+import player_targets from './player_targets'
+import { fireKnockBack } from './knockback'
+>>>>>>> Log player targets
 import { createPortalPair } from './portal'
 
 // import createControllerPresets from './controllerPresets';
@@ -91,7 +96,8 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   createTransmissionWave()
 
   spawn_players(4)
-  // fireKnockBack('player3', { x: 1550, y: 300 })
+  console.log('TARGETS')
+  console.log(player_targets())
 
   collisions()
 })

@@ -34,6 +34,7 @@ const createPlayer = (id, {x, y}, animation) => {
 
 const initPlayer = (id, targetId, {x, y}, onDeath, animation) => {
   const player = createPlayer(id, {x, y}, animation)
+  player.target_id = targetId
   initImmolationAura(id, targetId, {x, y})
 
   player.health = initHealth(onDeath)

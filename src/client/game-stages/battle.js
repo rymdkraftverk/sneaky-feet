@@ -14,6 +14,14 @@ import { gameOver } from './game-over'
 
 // import createControllerPresets from './controllerPresets';
 
+const createChurch = () => {
+  const church = Entity.create('church-one')
+  const churchSprite = Entity.addAnimation(church, ['church-1', 'church-2', 'church-3', 'church-4', 'church-5', 'church-6'], 0.05, { zIndex: -120 })
+  churchSprite.x = 1270
+  churchSprite.y = 430
+  churchSprite.scale.set(9)
+}
+
 const createBackground = () => {
   const entity = Entity.create('background')
   const sprite = Entity.addSprite(entity, 'background', { zIndex: -200 })
@@ -85,17 +93,18 @@ export default playerIds => {
   createGears()
   createHouses()
   createPowerPlant()
+  createChurch()
   keys()
   map()
 
   createPortalPair('portal-a', 'portal-b', { ax: 100, ay: 100, bx: 800, by: 300 })
-  createTransmissionBall()
+  //createTransmissionBall()
   // createControllerPresets();
 
   const input = Entity.create('input')
   input.behaviors.scan = scanGamepads()
 
-  createTransmissionWave()
+  //createTransmissionWave()
 
   spawnPlayers(playerIds, gameOver)
   player_targets(5)

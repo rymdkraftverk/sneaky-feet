@@ -19,6 +19,8 @@ rules:
   comma-dangle:
     - error
     - always-multiline
+  no-unused-vars:
+    - warn
 env:
   es6: true
   node: true

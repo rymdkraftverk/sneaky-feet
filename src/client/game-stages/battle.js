@@ -6,6 +6,7 @@ import keys from '../keys'
 // import { lobbyState } from './states'
 
 import map from '../map'
+import border_patrol from '../border_patrol'
 import { spawnPlayers } from '../spawn_players'
 import player_targets from '../player_targets'
 import { createPortalPair } from '../portal'
@@ -126,4 +127,5 @@ export default playerIds => {
 
   spawnPlayers(playerIds, gameOver(playerIds))
   player_targets(5)
+  border_patrol()
 }

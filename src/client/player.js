@@ -12,6 +12,7 @@ const createPlayer = (id, {x, y}) => {
   const sprite = Entity.addAnimation(player, animation, 0.05, { zIndex: 10 })
   Entity.addBody(player, Physics.Bodies.rectangle(x, y, 80, 80, {
     inertia: Infinity,
+    restitution: 0,
   }))
   sprite.scale.set(5)
   sprite.anchor.y = 0.65

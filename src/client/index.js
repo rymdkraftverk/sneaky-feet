@@ -9,6 +9,7 @@ import keys from './keys'
 import { initPlayer } from './player'
 import keyboard from './move/keyboard'
 import gamepad from './move/gamepad'
+import map from './map'
 
 // import createControllerPresets from './controllerPresets';
 
@@ -61,6 +62,5 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   initPlayer(playerId2, playerId3, {x: 410, y: 100}, onDeath(playerId2))
   initPlayer(playerId3, playerId1, {x: 830, y: 100}, onDeath(playerId3))
 
-  const floor = Entity.create('floor')
-  Entity.addBody(floor, Physics.Bodies.rectangle(300, 390, 600, 10, { isStatic: true }))
+  map()
 })

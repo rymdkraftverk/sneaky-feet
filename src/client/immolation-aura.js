@@ -43,8 +43,13 @@ const formatImmolationTargetType = targetId =>
 const formatImmolationType = id =>
   'immolation: ' + id
 
-const burn = (src, target) => {
-  target.entity.health = updateHealth(target.entity.health, dmgPerTick)
+const burn = (obj1, obj2) => {
+  if(obj1.entity.health)
+  {
+    obj1.entity.health = updateHealth(obj1.entity.health, dmgPerTick)
+  } else {
+    obj2.entity.health = updateHealth(obj2.entity.health, dmgPerTick)
+  }
 }
 
 export { initImmolationAura, formatImmolationTargetType }

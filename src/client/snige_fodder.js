@@ -20,8 +20,8 @@ export default id => ({
   },
   run: (b, e) => {
     const r = Math.random()
-    b.sprite.x = e.sprite.x - e.sprite.width + 100
-    b.sprite.y = e.sprite.y - e.sprite.height - 70
+    b.sprite.x = e.sprite.x - e.sprite.width + 70
+    b.sprite.y = e.sprite.y - e.sprite.height - 55
 
     if(b.sprite.visible) b.chat(b)
     if(r > threshold) b.init_chat(b)

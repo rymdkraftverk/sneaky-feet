@@ -4,7 +4,6 @@ import _ from 'lodash'
 import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } from 'l1'
 import sprites from './sprites.json'
 import battle from './game-stages/battle'
-import collisions from './collisions'
 
 import { playerIds } from './spawn_players'
 
@@ -20,6 +19,5 @@ Game.init(1735, 965, sprites, { debug: true, physics: true }).then(() => {
   Game.getPhysicsEngine().world.gravity.y = 1
 
   battle(_.values(playerIds))
-  collisions()
 })
 

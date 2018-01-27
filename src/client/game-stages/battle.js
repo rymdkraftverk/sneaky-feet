@@ -10,6 +10,7 @@ import { spawnPlayers } from '../spawn_players'
 import player_targets from '../player_targets'
 import { createPortalPair } from '../portal'
 import { gameOver } from './game-over'
+import collisions from '../collisions'
 
 // import createControllerPresets from './controllerPresets';
 
@@ -95,6 +96,11 @@ export default playerIds => {
   Entity
     .getAll()
     .forEach(Entity.destroy)
+
+  Entity
+    .removeAllCollisions()
+
+  collisions()
 
   Game.getPhysicsEngine().world.gravity.y = 1
 

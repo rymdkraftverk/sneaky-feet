@@ -27,7 +27,7 @@ const createLobbyContainer = (index, x, y) => {
   aButtonSprite.scale.set(4)
 
   const pressToJoin = Entity.create(`pressToJoinText${index}`)
-  const pressToJoinText = Entity.addText(pressToJoin, 'Press A to Join ', small('gray'), {zIndex: 10} )
+  const pressToJoinText = Entity.addText(pressToJoin, 'Press A to Join ', small('gray'), { zIndex: 10 })
   pressToJoinText.position.x = x + 170
   pressToJoinText.position.y = y + 170
 }

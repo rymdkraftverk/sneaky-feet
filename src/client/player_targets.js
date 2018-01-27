@@ -8,8 +8,8 @@ const player_sprites = {
 }
 
 const position = i => ({
-  x: 50 + 100 * i,
-  y: 50,
+  x: 1230 + 100 * i,
+  y: 30,
 })
 
 const player_targets = players => players.map(x => (
@@ -20,7 +20,7 @@ const player_targets = players => players.map(x => (
 
 const ordered = (first_id, targets, length) => {
   const order = [first_id]
-  for(let i = 1; i <= (length - 1); i++) {
+  for (let i = 1; i <= (length - 1); i++) {
     const prev = order[order.length - 1]
     const hunter = targets[prev]
     order.push(hunter)
@@ -33,7 +33,7 @@ const refreshed_targets = length => {
   const targets = player_targets(players)
   return ordered(players[0].id, targets, length)
     .map(x => player_sprites[x])
-    .map((x, i) => ({sprite: x, pos: position(i)}))
+    .map((x, i) => ({ sprite: x, pos: position(i) }))
 }
 
 const refresh_sign = length => {

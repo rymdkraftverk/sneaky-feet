@@ -16,12 +16,43 @@ import portals from '../portals'
 
 // import createControllerPresets from './controllerPresets';
 
+const createTower = () => {
+  const tower = Entity.create('tower-one')
+  const sprite = Entity.addAnimation(
+    tower,
+    [
+      'tower-1',
+      'tower-2',
+      'tower-3',
+      'tower-4',
+      'tower-5',
+      'tower-6',
+      'tower-7',
+      'tower-8',
+      'tower-9',
+      'tower-10',
+      'tower-11',
+      'tower-12',
+      'tower-13',
+      'tower-14',
+      'tower-15',
+      'tower-16',
+      'tower-17',
+    ],
+    0.05,
+    { zIndex: -160 }
+  )
+  sprite.x = -800
+  sprite.y = -150
+  sprite.scale.set(6)
+}
+
 const createSceneOverlay = () => {
   const overlay = Entity.create('scene-overlay')
   const sprite = Entity.addSprite(overlay, 'scene-overlay', { zIndex: -100 })
   sprite.x = 0
   sprite.y = 0
-  sprite.alpha = 0.2
+  sprite.alpha = 0.3
   sprite.scale.set(2.5)
 }
 
@@ -111,6 +142,7 @@ export default playerIds => {
   createHouses()
   createPowerPlant()
   createChurch()
+  createTower()
   createSceneOverlay()
   keys()
   map()

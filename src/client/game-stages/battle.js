@@ -27,7 +27,11 @@ export default playerIds => {
   Game.getPhysicsEngine().world.gravity.y = 1
 
   map()
-  portals()
+  spawnPlayers(playerIds, gameOver(playerIds))
+  player_targets(5)
+
+  // COUNTDOWN
+  console.log('COUNT')
 
   if (!battleMusic) {
     battleMusic = Sound
@@ -35,7 +39,6 @@ export default playerIds => {
       .play()
   }
 
-  spawnPlayers(playerIds, gameOver(playerIds))
-  player_targets(5)
   border_patrol()
+  portals()
 }

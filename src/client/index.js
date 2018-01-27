@@ -22,6 +22,21 @@ const createBackground = () => {
   sprite.scale.set(2.5)
 }
 
+const createGears = () => {
+  const gear1 = Entity.create('gear1')
+  const gear1Sprite = Entity.addSprite(gear1, 'gear-one')
+  gear1Sprite.x = 50
+  gear1Sprite.y = 805
+  gear1Sprite.scale.set(1.8)
+
+  const gear2 = Entity.create('gear2')
+  const gear2Sprite = Entity.addSprite(gear2, 'gear-one')
+  gear2Sprite.x = 940
+  gear2Sprite.y = 767
+  gear2Sprite.scale.set(2.4)
+
+}
+
 const createHouses = () => {
   const houseOne = Entity.create('house-one')
   const houseOneSprite = Entity.addSprite(houseOne, 'house-one', { zIndex: -100 })
@@ -62,6 +77,7 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   Debug.toggleHitboxes()
   createBackground()
   createHouses()
+  createGears()
   keys()
   map()
 

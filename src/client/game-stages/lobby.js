@@ -1,4 +1,4 @@
-import { Entity, Sound, Gamepad } from 'l1'
+import { Entity, Sound, Gamepad, Key } from 'l1'
 import _ from 'lodash'
 import { flow, keys, values, pick } from 'lodash/fp'
 import { small, big } from '../util/text'
@@ -124,17 +124,25 @@ const checkContinue = () => {
     return;
   }
 
-  lobbyMusic.pause()
   const keys = _.keys(playersThatHaveJoined)
   const ids = _.pick(indexToId, keys)
-  battle(_.values(ids))
+  goToBattle(ids)
+}
+
+const checkForceContinue = () => {
+  if (Key.isDown('space')) {
+    goToBattle(playerIds)
+  }
+}
+
+const goToBattle = (playerIds) => {
+  lobbyMusic.pause()
+  battle(_.values(playerIds))
 }
 
 const listeningForInput = () => ({
-  init: (b, e) => {
-
-  },
   run: (b, e) => {
+    checkForceContinue()
     _.times(4, checkIsReady)
     _.times(4, checkPlayerJoined)
     checkContinue()

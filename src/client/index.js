@@ -7,6 +7,7 @@ import sprites from './sprites.json'
 import scanGamepads from './behaviors/scanGamepads'
 
 import lobby from './game-stages/lobby'
+import keys from './keys'
 
 // import createControllerPresets from './controllerPresets';
 
@@ -18,6 +19,7 @@ Game.init(1735, 965, sprites, { debug: true, physics: true }).then(() => {
 
   const input = Entity.create('input')
   input.behaviors.scan = scanGamepads()
+  keys()
 
   lobby()
 })

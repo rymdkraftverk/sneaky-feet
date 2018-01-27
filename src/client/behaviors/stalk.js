@@ -14,7 +14,7 @@ export default targetId => {
       const target = Entity.get(targetId)
       const diff = normalise(sub(target.body.position, stalker.body.position))
 
-      if(triggers % 60 == 0) {
+      if(triggers % 30 == 0) {
         Physics.Body.applyForce(stalker.body, stalker.body.position, mult(diff, forceFactor))
         console.log(stalker.body.position)
       }

@@ -5,11 +5,10 @@ import wall_block from './wall_block'
 import floor_block from './floor_block'
 import dungeon from './dungeon'
 
-const block_offset = 30
 const block_position = (x, y) => (
   {
-    x: x * 45 + block_offset,
-    y: y * 20 + 20,
+    x: x * 45 - 10,
+    y: y * 20 - 0,
   }
 )
 

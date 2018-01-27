@@ -20,7 +20,7 @@ const createPlayer = (id, {x, y}, animation) => {
     collisionFilter: {
       category: categories.characters,
       mask: categories.default,
-    }, 
+    },
   }))
   sprite.scale.set(5)
   sprite.anchor.y = 0.65

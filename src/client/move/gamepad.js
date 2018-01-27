@@ -16,9 +16,9 @@ export default () => ({
       if (!checkThreshold(value)) return null
 
       if (value < 0) {
-        return -2
+        return -4
       } else if (value > 0) {
-        return 2
+        return 4
       } else {
         return null
       }
@@ -27,7 +27,7 @@ export default () => ({
     
     const getNewY = () => {
       if (e.onGround && (Key.isDown('space') || Gamepad.isPressed(GAMEPAD_ID, buttons.a))) {
-        return -10
+        return -12
       } else {
         return null
       }

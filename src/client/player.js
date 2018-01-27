@@ -3,6 +3,7 @@ import { Entity, Physics } from 'l1'
 import { initImmolationAura, formatImmolationTargetType } from './immolation-aura'
 import { formatKnockBackTargetType } from './knockback'
 import { initHealth } from './health'
+import { categories } from './collisions'
 
 const animation = ['lizard1', 'lizard2']
 const playerType = 'playerType'
@@ -13,6 +14,10 @@ const createPlayer = (id, {x, y}) => {
   Entity.addBody(player, Physics.Bodies.rectangle(x, y, 80, 80, {
     inertia: Infinity,
     restitution: 0,
+    collisionFilter: {
+      category: categories.characters,
+      mask: categories.default,
+    }, 
   }))
   sprite.scale.set(5)
   sprite.anchor.y = 0.65

@@ -10,7 +10,7 @@ const mult = Physics.Vector.mult
 const normalise = Physics.Vector.normalise
 const magnitude = Physics.Vector.magnitude
 
-const forceFactor = 5000
+const forceFactor = 25
 
 const formatType = projectile =>
   projectile.id
@@ -46,7 +46,11 @@ const knockBack = targetId => (obj1, obj2) => {
   const absoluteDistance = magnitude(distance)
   const forceDirection = normalise(distance)
 
-  const velocity = add(hunter.body.velocity, mult(forceDirection, forceFactor / absoluteDistance))
+  const velocityUpdate = absoluteDistance < 300
+    ? mult(forceDirection, forceFactor)
+    : {x: 0, y: 0}
+
+  const velocity = add(hunter.body.velocity, velocityUpdate)
   Physics.Body.setVelocity(hunter.body, velocity)
 
   Entity.destroy(projectile)

@@ -24,17 +24,25 @@ const createBackground = () => {
 
 const createGears = () => {
   const gear1 = Entity.create('gear1')
-  const gear1Sprite = Entity.addSprite(gear1, 'cog-one')
+  const gear1Sprite = Entity.addSprite(gear1, 'cog-one', { zIndex: -120 })
   gear1Sprite.x = 450
   gear1Sprite.y = 650
   gear1Sprite.scale.set(8)
 
   const gear2 = Entity.create('gear2')
-  const gear2Sprite = Entity.addSprite(gear2, 'cog-one')
+  const gear2Sprite = Entity.addSprite(gear2, 'cog-one', { zIndex: -120 })
   gear2Sprite.x = 940
   gear2Sprite.y = 600
   gear2Sprite.scale.set(10)
 
+}
+
+const createPowerPlant = () => {
+  const powerPlant = Entity.create('power-plant-one')
+  const powerPlantSprite = Entity.addAnimation(powerPlant, ['power-plant-1', 'power-plant-2', 'power-plant-3', 'power-plant-4', 'power-plant-5'], 0.1, { zIndex: -100 })
+  powerPlantSprite.x = 570
+  powerPlantSprite.y = 350
+  powerPlantSprite.scale.set(9)
 }
 
 const createHouses = () => {
@@ -78,6 +86,7 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   createBackground()
   createGears()
   createHouses()
+  createPowerPlant()
   keys()
   map()
 

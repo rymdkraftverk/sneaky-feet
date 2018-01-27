@@ -7,7 +7,7 @@ import keys from './keys'
 import collisions from './collisions'
 // import { lobbyState } from './states'
 
-import { initPlayer } from './player'
+import { initPlayer, player1Animation, player2Animation, player3Animation, player4Animation } from './player'
 import keyboard from './move/keyboard'
 import gamepad from './move/gamepad'
 import map from './map'
@@ -64,13 +64,15 @@ Game.init(1730, 940, sprites, { debug: true, physics: true }).then(() => {
   const playerId1 = 'player1'
   const playerId2 = 'player2'
   const playerId3 = 'player3'
+  const playerId4 = 'player4'
   // this player is targeting itself meaning it will
   // burn itself to death shortly and start spamming the console
-  const player1 = initPlayer(playerId1, playerId2, { x: 550, y: 100 }, onDeath(playerId1))
+  const player1 = initPlayer(playerId1, playerId2, { x: 550, y: 100 }, onDeath(playerId1), player1Animation)
   player1.behaviors.keyboard = keyboard()
   player1.behaviors.gamepad = gamepad()
-  initPlayer(playerId2, playerId3, { x: 410, y: 100 }, onDeath(playerId2))
-  initPlayer(playerId3, playerId1, { x: 830, y: 100 }, onDeath(playerId3))
+  initPlayer(playerId2, playerId3, { x: 410, y: 100 }, onDeath(playerId2), player2Animation)
+  initPlayer(playerId3, playerId1, { x: 830, y: 100 }, onDeath(playerId3), player3Animation)
+  initPlayer(playerId4, playerId1, { x: 900, y: 100 }, onDeath(playerId3), player4Animation)
   createTransmissionWave()
 
   map()

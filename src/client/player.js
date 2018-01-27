@@ -5,13 +5,16 @@ import { formatKnockBackTargetType } from './knockback'
 import { initHealth } from './health'
 import { categories } from './collisions'
 
-const animation = ['lizard1', 'lizard2']
+export const player1Animation = ['lizard1', 'lizard2']
+export const player2Animation = ['lizard1-p2', 'lizard2-p2']
+export const player3Animation = ['lizard1-p3', 'lizard2-p3']
+export const player4Animation = ['lizard1-p4', 'lizard2-p4']
 const playerType = 'playerType'
 
-const createPlayer = (id, {x, y}) => {
+const createPlayer = (id, {x, y}, animation) => {
   const player = Entity.create(id)
   const sprite = Entity.addAnimation(player, animation, 0.05, { zIndex: 10 })
-  Entity.addBody(player, Physics.Bodies.rectangle(x, y, 80, 80, {
+  Entity.addBody(player, Physics.Bodies.rectangle(x, y, 50, 50, {
     inertia: Infinity,
     restitution: 0,
     collisionFilter: {
@@ -29,8 +32,8 @@ const createPlayer = (id, {x, y}) => {
   return player
 }
 
-const initPlayer = (id, targetId, {x, y}, onDeath) => {
-  const player = createPlayer(id, {x, y})
+const initPlayer = (id, targetId, {x, y}, onDeath, animation) => {
+  const player = createPlayer(id, {x, y}, animation)
   initImmolationAura(id, targetId, {x, y})
 
   player.health = initHealth(onDeath)

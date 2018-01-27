@@ -136,7 +136,7 @@ export default playerIds => {
 
   if (!battleMusic) {
     battleMusic = Sound
-      .getSound('./sound/sneaky_feet.wav', { volue: 0.8, loop: true })
+      .getSound('./sound/sneaky_feet.wav', { volume: 0.8, loop: true })
       .play()
   }
 

@@ -30,7 +30,7 @@ export default () => {
   const lobbyHandler = Entity.create('lobbyHandler')
   lobbyHandler.behaviors.listeningForInput = listeningForInput()
 
-  lobbyMusic = Sound.getSound('./sound/lobby_music.wav', { volue: 0.8, loop: true })
+  lobbyMusic = Sound.getSound('./sound/lobby_music.wav', { volume: 1, loop: true })
   lobbyMusic.play()
 }
 
@@ -77,6 +77,7 @@ const playerReady = (index, x, y) => {
   const readyText = Entity.addText(ready, 'Ready!', big('gray'), { zIndex: 10 })
   readyText.position.x = x + 100
   readyText.position.y = y - 50
+  Sound.getSound('./sound/ready.wav', { volume: 0.4 }).play()
 }
 
 const checkPlayerJoined = (id) => {

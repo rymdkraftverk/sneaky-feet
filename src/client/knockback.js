@@ -1,4 +1,4 @@
-import { Entity, Physics } from 'l1'
+import { Entity, Physics, Sound } from 'l1'
 
 import stalk from './behaviors/stalk'
 
@@ -86,6 +86,7 @@ const renderExplosion = position => {
   animation.scale.set(15)
 
   Entity.addBody(explosion, explosionBody)
+  Sound.getSound('./sound/knockback.wav', { volume: 0.3 }).play()
 
   setTimeout(() => Entity.destroy(explosion), 200)
 }

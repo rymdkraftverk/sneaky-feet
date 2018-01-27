@@ -11,7 +11,6 @@ import map from './map'
 import spawn_players from './spawn_players'
 import { fireKnockBack } from './knockback'
 import { createPortalPair } from './portal'
-import attack from './controls/attack'
 
 // import createControllerPresets from './controllerPresets';
 
@@ -25,7 +24,7 @@ const createBackground = () => {
 
 const createHouses = () => {
   const houseOne = Entity.create('house-one')
-  const houseOneSprite = Entity.addSprite(houseOne, 'house-one')
+  const houseOneSprite = Entity.addSprite(houseOne, 'house-one', { zIndex: -100 })
   houseOneSprite.x = 100
   houseOneSprite.y = 300
   houseOneSprite.scale.set(6)

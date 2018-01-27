@@ -34,16 +34,13 @@ const createTower = () => {
       'tower-12',
       'tower-13',
       'tower-14',
-      'tower-15',
-      'tower-16',
-      'tower-17',
     ],
     0.05,
     { zIndex: -160 }
   )
-  sprite.x = -500
-  sprite.y = -100
-  sprite.scale.set(4.5)
+  sprite.x = -400
+  sprite.y = -80
+  sprite.scale.set(4)
 }
 
 const createSceneOverlay = () => {

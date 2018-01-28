@@ -53,11 +53,6 @@ export default (id) => ({
       }
     }
     
-    /*
-    const newX = getNewX()
-    const newY = getNewY()
-    */
-
     const oldX = e.body.velocity.x
     const oldY = e.body.velocity.y
     const controllerXOutput = getNewX()
@@ -65,7 +60,12 @@ export default (id) => ({
     let newY = oldY + (getNewY() || 0)
 
     if(e.onGround && !controllerXOutput) {
-      newX = 0
+      if(oldX > 0) {
+        newX = Math.max(0, oldX - WALKING_SPEED)
+      }
+      if(oldX < 0) {
+        newX = Math.min(0, oldX + WALKING_SPEED)
+      }
     }
 
     if(Math.abs(newX) > WALKING_SPEED) {

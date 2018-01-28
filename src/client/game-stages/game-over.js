@@ -46,8 +46,9 @@ export const gameOver = players => hunterId => () => {
   
   Entity.destroy(losingPlayer)
   Entity.destroy(Entity.get(`${target_id}Burn`))
+  Entity.getByType('baloon').forEach(Entity.destroy)
 
-  Sound.getSound('sound/fail.wav', { volume: 1.6}).play()
+  Sound.getSound('sound/fail.wav', { volume: 2}).play()
 
   deadLizard(x, y, layingDownSprite, () => {
     const entitiesToKeep = ['input', 'game-over']

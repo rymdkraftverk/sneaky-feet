@@ -17,6 +17,7 @@ export default id => ({
   init: b => {
     const baloon = Entity.create(`baloon_snige_fodder_${id}`)
     b.sprite = Entity.addSprite(baloon, 'prat-bubble', { zIndex: 99 })
+    Entity.addType(baloon, 'baloon')
   },
   run: (b, e) => {
     const r = Math.random()

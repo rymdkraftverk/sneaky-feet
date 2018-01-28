@@ -1,6 +1,6 @@
 import { Entity, Timer } from 'l1'
 
-const DEAD_TIMEOUT = 120
+const DEAD_TIMEOUT = 150
 
 export default (x, y, layingDownSprite, onEnd) => {
   const entity = Entity.create('deadLizard')
@@ -8,7 +8,13 @@ export default (x, y, layingDownSprite, onEnd) => {
   sprite.position.x = x - 20
   sprite.position.y = y - 124
   sprite.scale.set(5)
-  entity.behaviors.deadLizardB = deadLizardB(onEnd)
+  sprite.visible = false
+  
+  const createDeadLizard = () => {
+    entity.behaviors.moveDeadLizard = moveDeadLizard()
+  }
+  
+  entity.behaviors.deadLizardB = deadLizardB(onEnd, createDeadLizard)
 
   const layingDown = Entity.create('layingDownLizard')
   const layingDownS = Entity.addSprite(layingDown, layingDownSprite)
@@ -18,16 +24,29 @@ export default (x, y, layingDownSprite, onEnd) => {
   layingDownS.rotation = -(Math.PI / 2)
 }
 
-const deadLizardB = (onEnd) => ({
+const moveDeadLizard = () => ({
+  init: (b, e) => {
+    e.sprite.visible = true
+  },
+  run: (b, e) => {
+    e.sprite.position.y -= 1
+  },
+})
+  
+
+const deadLizardB = (onEnd, createDeadLizard) => ({
   timer: Timer.create(DEAD_TIMEOUT),
+  timeBeforeDeadLizardAppears: Timer.create(30),
   init: (b, e) => {
 
   },
   run: (b, e) => {
-    e.sprite.position.y -= 1
     if (b.timer.run()) {
       Entity.destroy(e)
       onEnd()
+    }
+    if (b.timeBeforeDeadLizardAppears.run()) {
+      createDeadLizard()
     }
   },
 })

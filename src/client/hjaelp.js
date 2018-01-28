@@ -4,6 +4,7 @@ export default id => ({
   init: b => {
     const baloon = Entity.create(`baloon_hjaelp_${id}`)
     b.sprite = Entity.addSprite(baloon, 'help-bubble', {zIndex: 99})
+    Entity.addType(baloon, 'baloon')
   },
   run: (b, e) => {
     b.sprite.x = e.sprite.x - e.sprite.width + 70

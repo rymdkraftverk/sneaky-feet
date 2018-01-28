@@ -29,6 +29,7 @@ const createPlayer = (id, {x, y}, animation, scale) => {
       category: categories.characters,
       mask: categories.default,
     },
+    friction: 0,
   }))
   sprite.scale.set(scale || 5)
   sprite.anchor.y = 0.65

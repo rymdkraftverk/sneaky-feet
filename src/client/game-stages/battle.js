@@ -38,7 +38,7 @@ export default player_tracker => {
 
     border_patrol()
     portals()
-    ultimate({x: 850, y: 440})
+    ultimate({x: 850, y: 430})
   })
 }
 

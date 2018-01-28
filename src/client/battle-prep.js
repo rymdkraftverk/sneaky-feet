@@ -1,7 +1,7 @@
 import { Entity, Timer } from 'l1'
 import { prep_sign, refresh_sign } from './player_targets'
 
-const DURATION = 0
+const DURATION = 300
 
 export default (length, onEnd) => {
   console.log('PREPARE')

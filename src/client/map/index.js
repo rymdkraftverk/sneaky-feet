@@ -1,9 +1,12 @@
 import _ from 'lodash'
 
+import { Entity } from 'l1'
+
 import background from './background'
 import block from './block'
 import wall_block from './wall_block'
 import floor_block from './floor_block'
+import ulti_door_block from './ulti_door_block'
 import dungeon from './dungeon'
 
 const block_position = (x, y) => (
@@ -29,9 +32,16 @@ const statics = () => {
       '█': block,
       '■': wall_block,
       '▬': floor_block,
+      '▁': ulti_door_block,
     }
 
     block_placers[cell](i, position)
+  })
+}
+
+export const open_ulti_door = () => {
+  Entity.getByType('ulti_door_block').forEach(block => {
+    block.open()
   })
 }
 

@@ -1,12 +1,39 @@
 import { Entity } from 'l1'
 
-const createClouds = () => {
-  const entity = Entity.create('clouds')
+const createCloud = (id, { initX, initY }, { x, y, alpha, delta }) => {
+  const entity = Entity.create(`clouds-${id}`)
   const sprite = Entity.addSprite(entity, 'clouds', { zIndex: -260 })
-  sprite.x = 300
-  sprite.y = 100
-  sprite.alpha = 0.4
+  const inited = false
+
+  if (inited) {
+    sprite.x = x()
+    sprite.y = y()
+  } else {
+    sprite.x = initX
+    sprite.y = initY
+  }
+
+  sprite.alpha = alpha()
   sprite.scale.set(10)
+
+  entity.behaviors.move = {
+    run: (b, e) => {
+      e.sprite.position.x -= delta()
+      if (e.sprite.position.x < -1600) {
+        e.sprite.x = x()
+        e.sprite.y = y()
+      }
+    },
+  }
+}
+
+const createClouds = () => {
+  const cloudOne = createCloud('1', { initX: 400, initY: 400 }, { x: () => 1600, y: () => 400, alpha: () => 0.1, delta: () => 0.2 })
+  const cloudTwo = createCloud('2', { initX: 200, initY: 200 }, { x: () => 1600, y: () => 200, alpha: () => 0.3, delta: () => .1 })
+  const cloudThree = createCloud('3', { initX: 600, initY: 50 }, { x: () => 1800, y: () => 50, alpha: () => 0.4, delta: () => 0.3 })
+  const cloudFour = createCloud('4', { initX: 1600, initY: 400 }, { x: () => 1600, y: () => 400, alpha: () => 0.1, delta: () => 0.2 })
+  const cloudFive = createCloud('5', { initX: 1800, initY: 200 }, { x: () => 1800, y: () => 200, alpha: () => 0.3, delta: () => .1 })
+  const cloudSix = createCloud('6', { initX: 2000, initY: 50 }, { x: () => 2000, y: () => 50, alpha: () => 0.4, delta: () => 0.3 })
 }
 
 const createTower = () => {

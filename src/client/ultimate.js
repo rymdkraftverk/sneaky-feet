@@ -8,12 +8,13 @@ const pickup = (a, b) => {
   if(!(a && b)) return
   a = a.entity
   b = b.entity
-
-  console.log('PICKED UP 3!')
   const ultimate = [a, b].find(x => x.id === 'ultimate')
   const player = [a, b].find(x => x.id != 'ultimate')
+
+  Entity.destroy(ultimate.ultimatorInner)
   Entity.destroy(ultimate)
-  player.sprite.scale.set(10)
+
+  player.behaviors.gamepad.walkingSpeed = 10
 }
 
 export default pos => {

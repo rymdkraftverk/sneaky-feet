@@ -22,8 +22,14 @@ const renderWinner = id => {
   createPlayer(id, {x: 750, y: 1000}, animation, 100)
 }
 
-export const gameOver = playerIds => playerId => () => {
+export const gameOver = players => playerId => () => {
   console.log(playerId + ' has won')
+
+  players[playerId]++
+
+  console.log('SCORE:')
+  console.log(players)
+
   const entitiesToKeep = ['input', 'game-over']
   Entity
     .getAll()
@@ -35,5 +41,5 @@ export const gameOver = playerIds => playerId => () => {
   createBackground()
   renderWinner(playerId)
 
-  setTimeout(() => battle(playerIds), 5000)
+  setTimeout(() => battle(players), 5000)
 }

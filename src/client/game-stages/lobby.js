@@ -138,7 +138,11 @@ const checkForceContinue = () => {
 
 const goToBattle = (playerIds) => {
   lobbyMusic.pause()
-  battle(_.values(playerIds))
+  const score = _
+    .values(playerIds)
+    .reduce((scores, playerId) => Object.assign(scores, {[playerId]: 0}, {}), {})
+
+  battle(score)
 }
 
 const listeningForInput = () => ({

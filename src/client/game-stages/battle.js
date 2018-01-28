@@ -13,7 +13,7 @@ import portals from '../portals'
 
 let battleMusic
 
-export default playerIds => {
+export default players => {
   Entity
     .getAll()
     .filter(({ id }) => id !== 'input')
@@ -27,7 +27,7 @@ export default playerIds => {
   Game.getPhysicsEngine().world.gravity.y = 1
 
   map()
-  spawnPlayers(playerIds, gameOver(playerIds))
+  spawnPlayers(Object.keys(players), gameOver(players))
   player_targets(5)
 
   // COUNTDOWN

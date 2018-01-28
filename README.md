@@ -1,8 +1,8 @@
 # Reptile Dysfunction 2: Sneaky Feet
 
 ## Live!
-Stable: http://game.sneakyfeet.xyz  
-Dev: http://dev.sneakyfeet.xyz
+[Stable](http://www.sneakyfeet.xyz)  
+[Dev](http://dev.sneakyfeet.xyz) 
 
 ---
 `npm install` install dependencies

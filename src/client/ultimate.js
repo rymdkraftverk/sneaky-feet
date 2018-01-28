@@ -30,11 +30,9 @@ export default pos => {
   innerSprite.x = pos.x
   innerSprite.y = pos.y
   innerSprite.scale.set(4)
-  innerSprite.visible = false
   const s = Entity.addSprite(e, 'ultimator-1')
 
   s.scale.set(4)
-  s.visible = false
 
   e.behaviors.rotate = {
     run: (b, e1) => {
@@ -58,7 +56,6 @@ export default pos => {
       Entity.addType(e, 'ultimate')
       b.countdown = Timer.create(DELAY)
       b.alive = false
-      b.sprite.visible = false
 
       Entity.addCollision(
         'ultimate',
@@ -69,8 +66,6 @@ export default pos => {
     run: b => {
       if (!b.alive && b.countdown.run()) {
         b.alive = true
-        b.sprite.visible = true
-        e.ultimatorInner.sprite.visible = true
         open_ulti_door()
       }
     },

@@ -14,6 +14,7 @@ const keyboardCheck = (id) => {
 }
 
 export default (id) => ({
+  walkingSpeed: WALKING_SPEED,
   enabled: true,
   run: (b, e) => {
     if (!b.enabled) return
@@ -34,14 +35,14 @@ export default (id) => ({
         }
         e.walkingLeft = true
         e.walkingRight = false
-        return -1 * WALKING_SPEED / 4
+        return -1 * b.walkingSpeed / 4
       } else if (value > THRESHOLD) {
         if (!e.walkingRight) {
           e.setWalking(e, 'right')
         }
         e.walkingLeft = false
         e.walkingRight = true
-        return WALKING_SPEED / 4
+        return b.walkingSpeed / 4
       }
     }
     
@@ -61,20 +62,20 @@ export default (id) => ({
 
     if(e.onGround && !controllerXOutput) {
       if(oldX > 0) {
-        newX = Math.max(0, oldX - WALKING_SPEED)
+        newX = Math.max(0, oldX - b.walkingSpeed)
       }
       if(oldX < 0) {
-        newX = Math.min(0, oldX + WALKING_SPEED)
+        newX = Math.min(0, oldX + b.walkingSpeed)
       }
     }
 
-    if(Math.abs(newX) > WALKING_SPEED) {
+    if(Math.abs(newX) > b.walkingSpeed) {
       if(Math.abs(newX) > Math.abs(oldX)) {
         if(oldX > 0) {
-          newX = Math.min(WALKING_SPEED, newX)
+          newX = Math.min(b.walkingSpeed, newX)
         }
         if(oldX < 0) {
-          newX = Math.max(-1 * WALKING_SPEED, newX)
+          newX = Math.max(-1 * b.walkingSpeed, newX)
         }
       }
     }

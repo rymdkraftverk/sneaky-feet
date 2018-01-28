@@ -14,7 +14,7 @@ const pickup = (a, b) => {
   Entity.destroy(ultimate.ultimatorInner)
   Entity.destroy(ultimate)
 
-  player.behaviors.gamepad.walkingSpeed = 10
+  player.behaviors.gamepad.walkingSpeed = 8
 }
 
 export default pos => {

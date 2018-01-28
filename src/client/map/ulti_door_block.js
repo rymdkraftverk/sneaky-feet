@@ -1,4 +1,4 @@
-import { Entity, Physics, Timer } from 'l1'
+import { Entity, Physics, Timer, Sound } from 'l1'
 
 const type = 'ulti_door_block'
 const id = i => `${type}_${i}`
@@ -10,7 +10,11 @@ const OPENING_TIME = 120
 
 const opening = () => ({
   timer: Timer.create(OPENING_TIME),
+  sound: Sound.getSound('sound/opening2.wav', { volume: 0.2 }),
   opening: true,
+  init: (b) => {
+    b.sound.play()
+  },
   run: (b, e) => {
     if (b.opening) {
       Physics.Body.setPosition(e.body, {
@@ -18,6 +22,7 @@ const opening = () => ({
         y: e.body.position.y + 1,
       })
       if(b.timer.run()) {
+        b.sound.pause()
         b.opening = false
       }
     }

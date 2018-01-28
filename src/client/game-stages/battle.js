@@ -8,6 +8,7 @@ import { gameOver } from './game-over'
 import battle_prep from '../battle-prep'
 import collisions from '../collisions'
 import portals from '../portals'
+import ultimate from '../ultimate'
 
 // import createControllerPresets from './controllerPresets';
 
@@ -37,6 +38,7 @@ export default player_tracker => {
 
     border_patrol()
     portals()
+    ultimate({x: 850, y: 440})
   })
 }
 

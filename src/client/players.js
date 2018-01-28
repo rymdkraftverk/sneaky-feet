@@ -33,21 +33,21 @@ const player_targets = player_ids => {
 export const player_templates = [
   {
     id: playerIds.player1,
-    x: 400,
-    y: 100,
+    x: 200,
+    y: 700,
     animation: player1Animation,
     walkingAnimation: player1Walking,
   },
   {
     id: playerIds.player2,
-    x: 600,
+    x: 650,
     y: 100,
     animation: player2Animation,
     walkingAnimation: player2Walking,
   },
   {
     id: playerIds.player3,
-    x: 800,
+    x: 1500,
     y: 100,
     animation: player3Animation,
     walkingAnimation: player3Walking,
@@ -55,7 +55,7 @@ export const player_templates = [
   {
     id: playerIds.player4,
     x: 1500,
-    y: 100,
+    y: 700,
     animation: player4Animation,
     walkingAnimation: player4Walking,
   },

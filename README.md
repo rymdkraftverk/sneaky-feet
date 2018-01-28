@@ -16,3 +16,6 @@ First
 In another tab
 
 `npm run watch` continuously build the frontend code
+
+
+Sound effects made with: https://www.leshylabs.com/apps/sfMaker/

@@ -3,10 +3,10 @@ import _ from 'lodash'
 import { createPortalPair } from './portal'
 
 const portalPositions = [
-  { x: 200, y: 200},
-  { x: 800, y: 300},
-  { x: 800, y: 800},
-  { x: 1200, y: 200},
+  { x: 80, y: 80},
+  { x: 850, y: 150},
+  { x: 850, y: 800},
+  { x: 1500, y: 200},
 ]
 
 const getObjects = (a, b) => {

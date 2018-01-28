@@ -47,7 +47,7 @@ export default (id) => ({
     
     const getNewY = () => {
       if (!Gamepad.isPressed(id, buttons.lb) && e.onGround && (keyboardCheck(id) || Gamepad.isPressed(id, buttons.a))) {
-        return -12
+        return -11
       } else {
         return null
       }

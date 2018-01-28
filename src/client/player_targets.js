@@ -1,4 +1,5 @@
 import { Entity } from 'l1'
+import { big } from './util/text'
 
 const player_sprites = {
   player1: 'lizard1',
@@ -7,6 +8,7 @@ const player_sprites = {
   player4: 'lizard1-p4',
 }
 
+const prep_text = 'HUNT THE LIZARD!' //'JAGTORDRE'
 const prep_position = i => ({
   x: 50 + 340 * i,
   y: 400,
@@ -46,7 +48,15 @@ const clear_prep_sign = () => {
 }
 
 const prep_sign = length => {
+  // text
+  const et = Entity.create('prep_text')
+  Entity.addType(et, 'prep_sign')
+  const text = Entity.addText(et, prep_text, big('#ddd', 100), { zIndex: 100 })
+  text.position.x = 100
+  text.position.y = 300
+
   refreshed_targets(length, prep_position).forEach((x, i) => {
+    // lizards
     const e = Entity.create(`prep_target_${i}`)
     Entity.addType(e, 'prep_sign')
 
@@ -55,6 +65,7 @@ const prep_sign = length => {
     sprite.position.y = x.pos.y
     sprite.scale.set(20)
 
+    // arrows
     if (length - 1 !== i) {
       const eSign = Entity.create(`target_arrow_${i}`)
       Entity.addType(eSign, 'prep_sign')

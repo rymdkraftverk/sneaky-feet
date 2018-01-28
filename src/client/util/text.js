@@ -2,9 +2,9 @@ const defaultStyle = {
   fontFamily: 'Press Start 2P',
 };
 
-export const big = (color) => ({
+export const big = (color, fontsize) => ({
   ...defaultStyle,
-  fontSize: 36,
+  fontSize: fontsize || 36,
   fill: color,
   stroke: '#4a1850',
   strokeThickness: 5,

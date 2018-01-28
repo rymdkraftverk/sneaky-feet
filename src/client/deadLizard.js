@@ -4,7 +4,7 @@ const DEAD_TIMEOUT = 150
 
 export default (x, y, layingDownSprite, onEnd) => {
   const entity = Entity.create('deadLizard')
-  const sprite = Entity.addAnimation(entity, ['lizard-dead-1', 'lizard-dead-2'], 0.08)
+  const sprite = Entity.addAnimation(entity, ['lizard-dead-1', 'lizard-dead-2'], 0.08, { zIndex: 200 })
   sprite.position.x = x - 20
   sprite.position.y = y - 124
   sprite.scale.set(5)
@@ -13,11 +13,11 @@ export default (x, y, layingDownSprite, onEnd) => {
   const createDeadLizard = () => {
     entity.behaviors.moveDeadLizard = moveDeadLizard()
   }
-  
+
   entity.behaviors.deadLizardB = deadLizardB(onEnd, createDeadLizard)
 
   const layingDown = Entity.create('layingDownLizard')
-  const layingDownS = Entity.addSprite(layingDown, layingDownSprite)
+  const layingDownS = Entity.addSprite(layingDown, layingDownSprite, { zIndex: 200 })
   layingDownS.position.x = x - 16
   layingDownS.position.y = y + 24
   layingDownS.scale.set(5)

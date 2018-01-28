@@ -14,7 +14,7 @@ let isGameOvering = false
 
 const createBackground = () => {
   const entity = Entity.create('background')
-  const sprite = Entity.addSprite(entity, 'background', { zIndex: -200 })
+  const sprite = Entity.addSprite(entity, 'background-lobby', { zIndex: -200 })
   sprite.x = 0
   sprite.y = 0
   sprite.scale.set(2.5)

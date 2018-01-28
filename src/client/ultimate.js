@@ -9,8 +9,10 @@ const pickup = (a, b) => {
   b = b.entity
 
   console.log('PICKED UP 3!')
-  const ultimate = [a, b].find(x => x.id == 'ultimate')
+  const ultimate = [a, b].find(x => x.id === 'ultimate')
+  const player = [a, b].find(x => x.id != 'ultimate')
   Entity.destroy(ultimate)
+  player.sprite.scale.set(10)
 }
 
 export default pos => {

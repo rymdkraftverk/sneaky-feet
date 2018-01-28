@@ -90,5 +90,6 @@
   "fireball1",
   "fireball2",
   "point-empty",
-  "point-won"
+  "point-won",
+  "winner"
 ]

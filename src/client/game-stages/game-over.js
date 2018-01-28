@@ -63,6 +63,13 @@ const renderPoint = (spriteName, position) => {
   sprite.scale.set(4)
 }
 
+const renderWinnerText = () => {
+  const entity = Entity.create(Math.random())
+  const sprite = Entity.addSprite(entity, 'winner', { zIndex: 10} )
+  sprite.position = {x: 300, y: 50}
+  sprite.scale.set(4)
+}
+
 export const gameOver = players => hunterId => () => {
   if (isGameOvering) return
   console.log(hunterId + ' has won')
@@ -105,6 +112,10 @@ export const gameOver = players => hunterId => () => {
     const nextStage = players[hunterId] < 3
       ? battle
       : lobby
+
+    if(players[hunterId] >= 3) {
+      renderWinnerText()
+    }
 
     isGameOvering = false
     setTimeout(() => nextStage(players), 5000)

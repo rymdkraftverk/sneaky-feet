@@ -8,10 +8,11 @@ import battle from './battle'
 import { playerIds } from '../players'
 import { indexToId } from '../util/players'
 
-const LOBBY_START_X = 100
-const LOBBY_Y = 10
+const LOBBY_START_X = 350
+const LOBBY_Y = 150
 const LOBBY_OFFSET_X = 550
 const LOBBY_OFFSET_Y = 400
+const LOBBY_WIDTH = 1735
 
 let lobbyMusic
 
@@ -23,6 +24,9 @@ const playersJoined = {
 }
 
 export default () => {
+  createBackground()
+  createOverlay()
+  createTitle()
   createLobbyContainer(0, LOBBY_START_X, LOBBY_Y)
   createLobbyContainer(1, LOBBY_START_X + LOBBY_OFFSET_X, LOBBY_Y)
   createLobbyContainer(2, LOBBY_START_X, LOBBY_Y + LOBBY_OFFSET_Y)
@@ -34,6 +38,31 @@ export default () => {
   lobbyMusic.play()
 }
 
+const createOverlay = () => {
+  const overlay = Entity.create('scene-overlay')
+  const sprite = Entity.addSprite(overlay, 'scene-overlay', { zIndex: -100 })
+  sprite.x = 0
+  sprite.y = 0
+  sprite.alpha = 0.30
+  sprite.scale.set(2.5)
+}
+
+const createBackground = () => {
+  const entity = Entity.create('lobby-background')
+  const sprite = Entity.addSprite(entity, 'background-lobby', { zIndex: -150 })
+  sprite.x = 0
+  sprite.y = 0
+  sprite.scale.set(2.5)
+}
+
+const createTitle = () => {
+  const entity = Entity.create('lobby-title')
+  const sprite = Entity.addSprite(entity, 'title')
+  sprite.x = (LOBBY_WIDTH / 2) - (sprite.width / 2)
+  sprite.y = 0
+  sprite.scale.set(1)
+}
+
 const createLobbyContainer = (index, x, y) => {
   const entity = Entity.create(`lobby-container-${index}`)
   const sprite = Entity.addSprite(entity, 'lobby-container')
@@ -42,7 +71,7 @@ const createLobbyContainer = (index, x, y) => {
   sprite.position.y = y
 
   const aButton = Entity.create(`a-button${index}`)
-  const aButtonSprite = Entity.addSprite(aButton, 'a-button', { zIndex: 10} )
+  const aButtonSprite = Entity.addSprite(aButton, 'a-button', { zIndex: 10 })
   aButtonSprite.position.x = x + 30
   aButtonSprite.position.y = y + 150
   aButtonSprite.scale.set(4)
@@ -55,7 +84,7 @@ const createLobbyContainer = (index, x, y) => {
 
 const playerJoined = (index, x, y) => {
   const startButton = Entity.create(`start-button${index}`)
-  const startButtonSprite = Entity.addSprite(startButton, 'start-button', { zIndex: 10} )
+  const startButtonSprite = Entity.addSprite(startButton, 'start-button', { zIndex: 10 })
   startButtonSprite.position.x = x
   startButtonSprite.position.y = y
   startButtonSprite.scale.set(3)
@@ -88,7 +117,7 @@ const checkPlayerJoined = (id) => {
 
     playerJoined(id, aButton.sprite.position.x, aButton.sprite.position.y)
 
-    ;[aButton, pressToJoin].forEach(Entity.destroy)
+      ;[aButton, pressToJoin].forEach(Entity.destroy)
 
     playersJoined[id] = {
       joined: true,
@@ -108,7 +137,7 @@ const checkIsReady = (id) => {
 
     playerReady(id, startButton.sprite.position.x, startButton.sprite.position.y)
 
-    ;[startButton, pressToReady].forEach(Entity.destroy)
+      ;[startButton, pressToReady].forEach(Entity.destroy)
     playersJoined[id] = {
       ...playersJoined[id],
       ready: true,
@@ -140,7 +169,7 @@ const goToBattle = (playerIds) => {
   lobbyMusic.pause()
   const score = _
     .values(playerIds)
-    .reduce((scores, playerId) => Object.assign(scores, {[playerId]: 0}, {}), {})
+    .reduce((scores, playerId) => Object.assign(scores, { [playerId]: 0 }, {}), {})
 
   battle(score)
 }

@@ -2,7 +2,7 @@ import { Entity, Physics, Timer } from 'l1'
 import { open_ulti_door } from './map'
 import { categories } from './collisions'
 
-const DELAY = 1000
+const DELAY = 2000
 
 const pickup = (a, b) => {
   if(!(a && b)) return

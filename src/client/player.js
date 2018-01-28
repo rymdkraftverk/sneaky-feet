@@ -1,9 +1,13 @@
-import { Entity, Physics } from 'l1'
+import { Entity, Game, Util, Physics } from 'l1'
 
 import { initImmolationAura, formatImmolationTargetType } from './immolation-aura'
 import { formatKnockBackTargetType } from './knockback'
 import { initHealth } from './health'
 import { categories } from './collisions'
+import keyboard from './controls/keyboard'
+import gamepad from './controls/gamepad'
+import attack from './controls/attack'
+import lifebar from './behaviors/lifebar'
 import hjaelp from './hjaelp'
 import snige_fodder from './snige_fodder'
 
@@ -18,6 +22,62 @@ export const player3Walking = ['lizard3-p3', 'lizard4-p3']
 export const player4Walking = ['lizard3-p4', 'lizard4-p4']
 
 const playerType = 'playerType'
+
+const burnFrames = ['fire1', 'fire2', 'fire3']
+
+const renderBurn = (id) => ({
+  init: b => {
+    const burn = Entity.create(`${id}Burn`)
+    b.sprite = Entity.addAnimation(burn, burnFrames, 0.05, { zIndex: 100} )
+    b.sprite.scale.set(4)
+  },
+  run: (b, e) => {
+    b.sprite.x = e.sprite.x - e.sprite.width / 2
+    b.sprite.y = e.sprite.y - e.sprite.height / 2
+    if (e.burn) {
+      b.sprite.visible = true
+    } else {
+      b.sprite.visible = false
+    }
+  },
+})
+
+const useFrames = (e, frames) => {
+  e.sprite.textures = frames.map(Game.getTexture)
+  e.sprite.play()
+}
+
+const makeSetWalking = (originalFrames, walkingFrames) => (e, direction) => {
+  if (direction === 'left') {
+    useFrames(e, walkingFrames)
+    if (!e.sprite.flipped) {
+      Util.flipSprite(e.sprite)
+    }
+  } else if (direction === 'right') {
+    useFrames(e, walkingFrames)
+    if (e.sprite.flipped) {
+      Util.flipSprite(e.sprite)
+    }
+  } else {
+    useFrames(e, originalFrames)
+  }
+  e.sprite.anchor.x = 0.5
+}
+
+const activatePlayer = p => {
+  p.behaviors.hjaelp = hjaelp(p.id)
+  p.behaviors.snige_fodder = snige_fodder(p.id)
+
+  p.behaviors.gamepad = gamepad(p.index)
+  p.behaviors.attack = attack(p.index)
+  p.behaviors.renderBurn = renderBurn(p.id)
+  p.setWalking = makeSetWalking(p.animation, p.walkingAnimation)
+  p.behaviors.lifebar = lifebar(p.sprite, p.sprite.width, 5)
+
+  if(p.id === 'player1') {
+    p.behaviors.keyboard = keyboard()
+  }
+}
 
 const createPlayer = (id, {x, y}, animation, scale) => {
   const player = Entity.create(id)
@@ -47,9 +107,7 @@ const initPlayer = (id, targetId, {x, y}, onDeath, animation) => {
   initImmolationAura(id, targetId, {x, y})
 
   player.health = initHealth(onDeath)
-  player.behaviors.hjaelp = hjaelp(id)
-  player.behaviors.snige_fodder = snige_fodder(id)
   return player
 }
 
-export { initPlayer, createPlayer }
+export { initPlayer, createPlayer, activatePlayer }

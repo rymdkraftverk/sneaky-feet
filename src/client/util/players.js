@@ -1,4 +1,4 @@
-import { playerIds } from '../spawn_players'
+import { playerIds } from '../players'
 
 export const indexToId = {
   0: playerIds.player1,

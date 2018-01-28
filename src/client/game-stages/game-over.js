@@ -2,7 +2,7 @@
 import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } from 'l1'
 
 import { createPlayer } from '../player'
-import { player_templates } from '../spawn_players'
+import { player_templates } from '../players'
 
 import battle from './battle'
 

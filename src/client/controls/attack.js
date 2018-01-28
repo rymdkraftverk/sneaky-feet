@@ -1,7 +1,7 @@
 import { Key, Gamepad, Timer } from 'l1'
 import { buttons } from '../util/gamepad'
 import { fireKnockBack } from '../knockback'
-import { playerIds } from '../spawn_players'
+import { playerIds } from '../players'
 
 const ABILITY_COOLDOWN = 100
 

@@ -3,9 +3,9 @@ import _ from 'lodash'
 import { flow, keys, values, pick } from 'lodash/fp'
 import { small, big } from '../util/text'
 import { buttons } from '../util/gamepad'
-import { player_templates } from '../spawn_players'
+import { player_templates } from '../players'
 import battle from './battle'
-import { playerIds } from '../spawn_players'
+import { playerIds } from '../players'
 import { indexToId } from '../util/players'
 
 const LOBBY_START_X = 100
@@ -82,14 +82,14 @@ const playerReady = (index, x, y) => {
 
 const checkPlayerJoined = (id) => {
   if (!playersJoined[id] && Gamepad.isPressed(id, buttons.a)) {
-    
+
     const aButton = Entity.get(`a-button${id}`)
     const pressToJoin = Entity.get(`pressToJoinText${id}`)
-    
+
     playerJoined(id, aButton.sprite.position.x, aButton.sprite.position.y)
-    
+
     ;[aButton, pressToJoin].forEach(Entity.destroy)
-    
+
     playersJoined[id] = {
       joined: true,
       ready: false,
@@ -99,15 +99,15 @@ const checkPlayerJoined = (id) => {
 
 const checkIsReady = (id) => {
   if (
-    playersJoined[id] && 
-    !playersJoined[id].ready && 
+    playersJoined[id] &&
+    !playersJoined[id].ready &&
     Gamepad.isPressed(id, buttons.start)
   ) {
     const startButton = Entity.get(`start-button${id}`)
     const pressToReady = Entity.get(`pressToReadyText${id}`)
-    
+
     playerReady(id, startButton.sprite.position.x, startButton.sprite.position.y)
-    
+
     ;[startButton, pressToReady].forEach(Entity.destroy)
     playersJoined[id] = {
       ...playersJoined[id],

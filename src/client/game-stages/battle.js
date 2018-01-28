@@ -4,8 +4,8 @@ import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } f
 import map from '../map'
 import border_patrol from '../border_patrol'
 import * as players from '../players'
-import player_targets from '../player_targets'
 import { gameOver } from './game-over'
+import battle_prep from '../battle-prep'
 import collisions from '../collisions'
 import portals from '../portals'
 
@@ -27,19 +27,19 @@ export default player_tracker => {
   Game.getPhysicsEngine().world.gravity.y = 1
 
   map()
-  players.spawn(Object.keys(player_tracker), gameOver(player_tracker))
-  player_targets(5)
-  players.activate()
+  const players_ids = Object.keys(player_tracker)
+  players.spawn(players_ids, gameOver(player_tracker))
+  battle_prep(players_ids.length + 1, () => {
+    console.log('GO!')
+    players.activate()
 
-  // COUNTDOWN
-  console.log('COUNT')
+    if (!battleMusic) {
+      battleMusic = Sound
+        .getSound('./sound/sneaky_feet.wav', { volume: 0.8, loop: true })
+        .play()
+    }
 
-  if (!battleMusic) {
-    battleMusic = Sound
-      .getSound('./sound/sneaky_feet.wav', { volume: 0.8, loop: true })
-      .play()
-  }
-
-  border_patrol()
-  portals()
+    border_patrol()
+    portals()
+  })
 }

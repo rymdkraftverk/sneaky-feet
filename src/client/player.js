@@ -71,7 +71,7 @@ const activatePlayer = p => {
   p.behaviors.gamepad = gamepad(p.index)
   p.behaviors.attack = attack(p.index)
   p.behaviors.renderBurn = renderBurn(p.id)
-  
+
   p.behaviors.lifebar = lifebar(p.sprite, p.sprite.width, 5)
 
   if(p.id === 'player1') {

@@ -7,7 +7,12 @@ const player_sprites = {
   player4: 'lizard1-p4',
 }
 
-const position = i => ({
+const prep_position = i => ({
+  x: 50 + 340 * i,
+  y: 400,
+})
+
+const battle_position = i => ({
   x: 1230 + 100 * i,
   y: 30,
 })
@@ -28,16 +33,42 @@ const ordered = (first_id, targets, length) => {
   return order
 }
 
-const refreshed_targets = length => {
+const refreshed_targets = (length, positions) => {
   const players = Entity.getByType('playerType')
   const targets = player_targets(players)
   return ordered(players[0].id, targets, length)
     .map(x => player_sprites[x])
-    .map((x, i) => ({ sprite: x, pos: position(i) }))
+    .map((x, i) => ({ sprite: x, pos: positions(i) }))
+}
+
+const clear_prep_sign = () => {
+  Entity.getByType('prep_sign').forEach(Entity.destroy)
+}
+
+const prep_sign = length => {
+  refreshed_targets(length, prep_position).forEach((x, i) => {
+    const e = Entity.create(`prep_target_${i}`)
+    Entity.addType(e, 'prep_sign')
+
+    const sprite = Entity.addSprite(e, x.sprite, {zIndex: 100})
+    sprite.position.x = x.pos.x
+    sprite.position.y = x.pos.y
+    sprite.scale.set(20)
+
+    if (length - 1 !== i) {
+      const eSign = Entity.create(`target_arrow_${i}`)
+      Entity.addType(eSign, 'prep_sign')
+      const signSprite = Entity.addSprite(eSign, 'arrow', {zIndex: 100})
+      signSprite.position.x = x.pos.x + 250
+      signSprite.position.y = x.pos.y + 90
+      signSprite.scale.set(3)
+    }
+  })
 }
 
 const refresh_sign = length => {
-  refreshed_targets(length).forEach((x, i) => {
+  clear_prep_sign()
+  refreshed_targets(length, battle_position).forEach((x, i) => {
     const e = Entity.create(`target_${i}`)
     const sprite = Entity.addSprite(e, x.sprite)
     sprite.position.x = x.pos.x
@@ -53,4 +84,4 @@ const refresh_sign = length => {
   })
 }
 
-export default refresh_sign
+export { prep_sign, refresh_sign }

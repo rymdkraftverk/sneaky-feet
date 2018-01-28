@@ -1,4 +1,4 @@
-import { Entity } from 'l1'
+import { Entity, Util, Timer } from 'l1'
 import { big } from './util/text'
 
 const player_sprites = {
@@ -15,7 +15,7 @@ const prep_position = i => ({
 })
 
 const battle_position = i => ({
-  x: 1230 + 100 * i,
+  x: 1230 + 50 * i,
   y: 30,
 })
 
@@ -44,8 +44,60 @@ const refreshed_targets = (length, positions) => {
 }
 
 const clear_prep_sign = () => {
-  Entity.getByType('prep_sign').forEach(Entity.destroy)
+  Entity.destroy(Entity.get('prep_text'))
+  const signs = Entity.getByType('prep_sign')
+  signs.forEach((entity, i) => {
+    const target = battle_position(i)
+    const { sprite: { position } } = entity
+    let targetScale, x, y
+    if (entity.types.includes('prep_arrow')){
+      targetScale = 1
+      x = target.x + 18
+      y = target.y + 18
+    } else {
+      targetScale = 5
+      x = target.x
+      y = target.y
+    }
+    entity.behaviors.moveSign = moveSign(position.x, position.y, x, y, targetScale)
+  })
 }
+
+const MOVE_TIME = 30
+
+const makeGetScale = (distance, start, end) => (x) => {
+  return ((end - start) / distance) * x + start
+}
+
+const moveSign = (startX, startY, endX, endY, targetScale) => ({
+  timer: Timer.create(MOVE_TIME),
+  init: (b, e) => {
+    b.totalDistance = Util.getDistance(startX, startY, endX, endY)
+    b.startingScale = e.sprite.scale
+    b.speedX = Math.floor(Math.abs(endX - startX) / MOVE_TIME)
+    b.speedY = Math.floor(Math.abs(endY - startY) / MOVE_TIME)
+    b.getScale = makeGetScale(b.totalDistance, e.sprite.scale.x, targetScale)
+  },
+  run: (b, e) => {
+    const distance = Util.getDistance(e.sprite.x, e.sprite.y, endX, endY)
+    if (e.sprite.x < endX) {
+      e.sprite.x += b.speedX
+    }
+
+    if (e.sprite.y > endY) {
+      e.sprite.y -= b.speedY
+    }
+
+    e.sprite.scale.set(b.getScale(b.totalDistance - distance))
+    if (b.timer.run()) {
+      e.sprite.scale.set(targetScale)
+      e.sprite.x = endX
+      e.sprite.y = endY
+      delete e.behaviors.moveSign
+    }
+  },
+})
+
 
 const prep_sign = length => {
   // text
@@ -69,6 +121,7 @@ const prep_sign = length => {
     if (length - 1 !== i) {
       const eSign = Entity.create(`target_arrow_${i}`)
       Entity.addType(eSign, 'prep_sign')
+      Entity.addType(eSign, 'prep_arrow')
       const signSprite = Entity.addSprite(eSign, 'arrow', {zIndex: 100})
       signSprite.position.x = x.pos.x + 250
       signSprite.position.y = x.pos.y + 90
@@ -79,20 +132,20 @@ const prep_sign = length => {
 
 const refresh_sign = length => {
   clear_prep_sign()
-  refreshed_targets(length, battle_position).forEach((x, i) => {
-    const e = Entity.create(`target_${i}`)
-    const sprite = Entity.addSprite(e, x.sprite)
-    sprite.position.x = x.pos.x
-    sprite.position.y = x.pos.y
-    sprite.scale.set(5)
+  // refreshed_targets(length, battle_position).forEach((x, i) => {
+  //   const e = Entity.create(`target_${i}`)
+  //   const sprite = Entity.addSprite(e, x.sprite)
+  //   sprite.position.x = x.pos.x
+  //   sprite.position.y = x.pos.y
+  //   sprite.scale.set(5)
 
-    if (length - 1 !== i) {
-      const eSign = Entity.create(`target_arrow_${i}`)
-      const signSprite = Entity.addSprite(eSign, 'arrow')
-      signSprite.position.x = x.pos.x + 70
-      signSprite.position.y = x.pos.y + 15
-    }
-  })
+  //   if (length - 1 !== i) {
+  //     const eSign = Entity.create(`target_arrow_${i}`)
+  //     const signSprite = Entity.addSprite(eSign, 'arrow')
+  //     signSprite.position.x = x.pos.x + 70
+  //     signSprite.position.y = x.pos.y + 15
+  //   }
+  // })
 }
 
 export { prep_sign, refresh_sign }

@@ -95,13 +95,13 @@ const createPowerPlant = () => {
 
 const createHouses = () => {
   const houseOne = Entity.create('house-one')
-  const houseOneSprite = Entity.addSprite(houseOne, 'house-one', { zIndex: -100 })
+  const houseOneSprite = Entity.addSprite(houseOne, 'house-one', { zIndex: -110 })
   houseOneSprite.x = 100
   houseOneSprite.y = 350
   houseOneSprite.scale.set(6)
 
   const houseTwo = Entity.create('house-two')
-  const houseTwoSprite = Entity.addSprite(houseTwo, 'house-two', { zIndex: -100 })
+  const houseTwoSprite = Entity.addSprite(houseTwo, 'house-two', { zIndex: -110 })
   houseTwoSprite.x = 1120
   houseTwoSprite.y = 158
   houseTwoSprite.scale.set(6)

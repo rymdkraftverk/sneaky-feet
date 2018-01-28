@@ -5,7 +5,7 @@ import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } f
 import { createPlayer } from '../player'
 import { player_templates } from '../players'
 
-import battle from './battle'
+import battle, { stopBattleMusic } from './battle'
 import lobby from './lobby'
 import deadLizard from '../deadLizard'
 import { immolationType } from '../immolation-aura'
@@ -117,6 +117,8 @@ export const gameOver = players => hunterId => () => {
 
     if(players[hunterId] >= WIN_LIMIT) {
       renderWinnerText()
+      stopBattleMusic()
+      Sound.getSound('sound/victory.wav', { volume: 0.7 }).play()
     }
 
     isGameOvering = false

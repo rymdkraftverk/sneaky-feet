@@ -1,5 +1,6 @@
 import { Entity, Physics, Timer } from 'l1'
 import { open_ulti_door } from './map'
+import { categories } from './collisions'
 
 const DELAY = 1000
 
@@ -43,7 +44,15 @@ export default pos => {
 
   e.behaviors.life = {
     init: b => {
-      Entity.addBody(e, Physics.Bodies.circle(pos.x, pos.y, 40, { isStatic: true }))
+      Entity.addBody(
+        e,
+        Physics.Bodies.circle(pos.x, pos.y, 40, {
+          isStatic: true,
+          isSensor: true,
+          category: categories.characters,
+          mask: categories.default,
+        })
+      )
       b.sprite = s
       Entity.addType(e, 'ultimate')
       b.countdown = Timer.create(DELAY)

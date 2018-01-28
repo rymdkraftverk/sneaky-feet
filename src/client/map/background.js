@@ -3,12 +3,13 @@ import { Entity } from 'l1'
 const createCloud = (id, { initX, initY }, { x, y, alpha, delta }) => {
   const entity = Entity.create(`clouds-${id}`)
   const sprite = Entity.addSprite(entity, 'clouds', { zIndex: -260 })
-  const inited = false
+  let inited = false
 
   if (inited) {
     sprite.x = x()
     sprite.y = y()
   } else {
+    inited = true
     sprite.x = initX
     sprite.y = initY
   }
@@ -25,6 +26,40 @@ const createCloud = (id, { initX, initY }, { x, y, alpha, delta }) => {
       }
     },
   }
+}
+
+const createUltimatorOne = ({ x, y }) => {
+  const entity = Entity.create('ultimator-1')
+  const sprite = Entity.addSprite(entity, 'ultimator-1')
+  entity.behaviors.rotate = {
+    run: (b, e) => {
+      e.sprite.rotation -= 0.08
+      e.sprite.anchor.set(0.489)
+    },
+  }
+  sprite.x = x
+  sprite.y = y
+  sprite.scale.set(4.1)
+}
+
+const createUltimatorTwo = ({ x, y }) => {
+  const entity = Entity.create('ultimator-2')
+  const sprite = Entity.addSprite(entity, 'ultimator-2')
+  entity.behaviors.rotate = {
+    run: (b, e) => {
+      e.sprite.rotation += 0.1
+      e.sprite.anchor.set(0.4885)
+    },
+  }
+  sprite.x = x
+  sprite.y = y
+  sprite.scale.set(4)
+}
+
+
+const createUltimator = ({ x, y }) => {
+  createUltimatorOne({ x, y })
+  createUltimatorTwo({ x, y })
 }
 
 const createClouds = () => {

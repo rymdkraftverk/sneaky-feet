@@ -40,9 +40,16 @@ const refresh_sign = length => {
   refreshed_targets(length).forEach((x, i) => {
     const e = Entity.create(`target_${i}`)
     const sprite = Entity.addSprite(e, x.sprite)
-    sprite.scale.set(5)
     sprite.position.x = x.pos.x
     sprite.position.y = x.pos.y
+    sprite.scale.set(5)
+
+    if (length - 1 !== i) {
+      const eSign = Entity.create(`target_arrow_${i}`)
+      const signSprite = Entity.addSprite(eSign, 'arrow')
+      signSprite.position.x = x.pos.x + 70
+      signSprite.position.y = x.pos.y + 15
+    }
   })
 }
 

@@ -14,7 +14,9 @@ const keyboardCheck = (id) => {
 }
 
 export default (id) => ({
+  enabled: true,
   run: (b, e) => {
+    if (!b.enabled) return
     const getNewX = () => {
       const value = Gamepad.axisDir(id, axes.leftH)
       if (!value) return null

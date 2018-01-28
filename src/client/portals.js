@@ -74,6 +74,7 @@ const portalCreatorB = () => ({
 const portalTravelling = (x, y, onFinish) => ({
   time: 15,
   init: (b, e) => {
+    e.behaviors.gamepad.enabled = false
     Physics.Body.setStatic(e.body, true)
     b.originalScale = e.sprite.scale.x
     b.timeToDisappear = Timer.create(b.time)
@@ -82,6 +83,10 @@ const portalTravelling = (x, y, onFinish) => ({
     if (b.timeToDisappear && e.sprite.scale.x > 0) {
       e.sprite.scale.x -= 0.5
     }
+    else if (b.timeToDisappear && e.sprite.scale.x < 0) {
+      e.sprite.scale.x += 0.5
+    }
+
     if (b.timeToDisappear && b.timeToDisappear.run()) {
       b.timeToAppear = Timer.create(b.time)
       Physics.Body.setPosition(e.body, { x, y })
@@ -95,6 +100,7 @@ const portalTravelling = (x, y, onFinish) => ({
       e.sprite.scale.x = scaleFactor(b.timeToAppear.counter()) * b.originalScale
     }  
     if (b.timeToAppear && b.timeToAppear.run()) {
+      e.behaviors.gamepad.enabled = true
       onFinish()
       delete e.behaviors.portalTravelling
       Physics.Body.setStatic(e.body, false)

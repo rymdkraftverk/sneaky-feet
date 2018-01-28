@@ -33,7 +33,7 @@ export default (id) => ({
         // Player is holding attack
         const target = getTarget(id)
         console.log('target', target)
-        if (target) {
+        if (target && e.target_id !== target) {
           const { x, y} = e.body.position
           fireKnockBack(target, { x, y })
           console.log('attacked: ' + target)

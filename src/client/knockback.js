@@ -82,7 +82,7 @@ const renderExplosion = position => {
   const animation = Entity
     .addAnimation(explosion, explosionAnimation, 0.75, { zIndex: 100 })
 
-  animation.scale.set(15)
+  animation.scale.set(12)
   animation.alpha = 0.4
 
   Entity.addBody(explosion, explosionBody)

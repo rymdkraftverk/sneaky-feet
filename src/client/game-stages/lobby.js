@@ -1,4 +1,4 @@
-import { Entity, Sound, Gamepad, Key } from 'l1'
+import { Entity, Sound, Gamepad, Game, Key } from 'l1'
 import _ from 'lodash'
 import { flow, keys, values, pick } from 'lodash/fp'
 import { small, big } from '../util/text'
@@ -59,13 +59,13 @@ const createTitle = () => {
   const entity = Entity.create('lobby-title')
   const sprite = Entity.addSprite(entity, 'title')
   sprite.x = (LOBBY_WIDTH / 2) - (sprite.width / 2)
-  sprite.y = 0
+  sprite.y = 15
   sprite.scale.set(1)
 }
 
 const createLobbyContainer = (index, x, y) => {
   const entity = Entity.create(`lobby-container-${index}`)
-  const sprite = Entity.addSprite(entity, 'lobby-container')
+  const sprite = Entity.addAnimation(entity, ['lobby-container-no-player'], 0.2)
   sprite.scale.set(8)
   sprite.position.x = x
   sprite.position.y = y
@@ -107,11 +107,30 @@ const playerReady = (index, x, y) => {
   readyText.position.x = x + 100
   readyText.position.y = y - 50
   Sound.getSound('./sound/ready.wav', { volume: 0.4 }).play()
+  const container = Entity.get(`lobby-container-${index}`)
+  container.sprite.textures = [
+    'lobby-container-player-ready-1',
+    'lobby-container-player-ready-2',
+    'lobby-container-player-ready-3',
+    'lobby-container-player-ready-4',
+    'lobby-container-player-ready-5',
+    'lobby-container-player-ready-6',
+    'lobby-container-player-ready-7',
+    'lobby-container-player-ready-8',
+    'lobby-container-player-ready-9',
+    'lobby-container-player-ready-10',
+    'lobby-container-player-ready-11',
+    'lobby-container-player-ready-12',
+    'lobby-container-player-ready-13',
+  ].map(Game.getTexture)
+  container.sprite.play()
 }
 
 const checkPlayerJoined = (id) => {
   if (!playersJoined[id] && Gamepad.isPressed(id, buttons.a)) {
 
+    const container = Entity.get(`lobby-container-${id}`)
+    container.sprite.textures = ['lobby-container'].map(Game.getTexture)
     const aButton = Entity.get(`a-button${id}`)
     const pressToJoin = Entity.get(`pressToJoinText${id}`)
 

@@ -71,7 +71,7 @@ const activatePlayer = p => {
   p.behaviors.gamepad = gamepad(p.index)
   p.behaviors.attack = attack(p.index)
   p.behaviors.renderBurn = renderBurn(p.id)
-  p.setWalking = makeSetWalking(p.animation, p.walkingAnimation)
+  
   p.behaviors.lifebar = lifebar(p.sprite, p.sprite.width, 5)
 
   if(p.id === 'player1') {
@@ -79,7 +79,7 @@ const activatePlayer = p => {
   }
 }
 
-const createPlayer = (id, {x, y}, animation, scale) => {
+const createPlayer = (id, {x, y}, animation, scale, walkingAnimation) => {
   const player = Entity.create(id)
   const sprite = Entity.addAnimation(player, animation, 0.05, { zIndex: 10 })
   Entity.addBody(player, Physics.Bodies.rectangle(x, y, 50, 50, {
@@ -98,11 +98,13 @@ const createPlayer = (id, {x, y}, animation, scale) => {
   Entity.addType(player, formatImmolationTargetType(id))
   Entity.addType(player, formatKnockBackTargetType(id))
 
+  player.setWalking = makeSetWalking(animation, walkingAnimation)
+
   return player
 }
 
-const initPlayer = (id, targetId, {x, y}, onDeath, animation) => {
-  const player = createPlayer(id, {x, y}, animation)
+const initPlayer = (id, targetId, {x, y}, onDeath, animation, walkingAnimation) => {
+  const player = createPlayer(id, {x, y}, animation, undefined, walkingAnimation)
   player.target_id = targetId
   initImmolationAura(id, targetId, {x, y})
 

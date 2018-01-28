@@ -77,7 +77,8 @@ export const spawn = (activePlayerIds, onDeath) => {
       targets[p.id],
       {x: p.x, y: p.y},
       onDeath(hunters[p.id]),
-      p.animation
+      p.animation,
+      p.walkingAnimation
     )
     player.index = index
   })

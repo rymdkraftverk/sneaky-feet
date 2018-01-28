@@ -4,7 +4,7 @@ import { flow, keys, values, pick } from 'lodash/fp'
 import { small, big } from '../util/text'
 import { buttons } from '../util/gamepad'
 import { player_templates } from '../players'
-import battle from './battle'
+import battle, { stopBattleMusic } from './battle'
 import { playerIds } from '../players'
 import { indexToId } from '../util/players'
 
@@ -42,6 +42,7 @@ export default () => {
   const lobbyHandler = Entity.create('lobbyHandler')
   lobbyHandler.behaviors.listeningForInput = listeningForInput()
 
+  stopBattleMusic()
   lobbyMusic = Sound.getSound('./sound/lobby_music.wav', { volume: 1, loop: true })
   lobbyMusic.play()
 }

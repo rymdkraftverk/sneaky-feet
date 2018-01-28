@@ -66,7 +66,7 @@ const renderPoint = (spriteName, position) => {
 const renderWinnerText = () => {
   const entity = Entity.create(Math.random())
   const sprite = Entity.addSprite(entity, 'winner', { zIndex: 10} )
-  sprite.position = {x: 300, y: 50}
+  sprite.position = {x: 300, y: 20}
   sprite.scale.set(4)
 }
 

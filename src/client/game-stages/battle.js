@@ -33,13 +33,22 @@ export default player_tracker => {
     console.log('GO!')
     players.activate()
 
-    if (!battleMusic) {
-      battleMusic = Sound
-        .getSound('./sound/sneaky_feet.wav', { volume: 0.8, loop: true })
-        .play()
-    }
+    playBattleMusic()
 
     border_patrol()
     portals()
   })
+}
+
+export const stopBattleMusic = () => {
+  if (battleMusic) {
+    battleMusic.pause()
+  }
+}
+
+export const playBattleMusic = () => {
+  if (!battleMusic) {
+    battleMusic = Sound.getSound('./sound/sneaky_feet.wav', { volume: 0.8, loop: true })
+    battleMusic.play()
+  }
 }

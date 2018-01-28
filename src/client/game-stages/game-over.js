@@ -5,6 +5,10 @@ import { createPlayer } from '../player'
 import { player_templates } from '../players'
 
 import battle from './battle'
+import deadLizard from '../deadLizard'
+import { immolationType } from '../immolation-aura'
+
+let isGameOvering = false
 
 const createBackground = () => {
   const entity = Entity.create('background')
@@ -21,25 +25,42 @@ const renderWinner = id => {
 
   createPlayer(id, {x: 750, y: 1000}, animation, 100)
 }
-
-export const gameOver = players => playerId => () => {
-  console.log(playerId + ' has won')
-
-  players[playerId]++
+export const gameOver = players => hunterId => () => {
+  if (isGameOvering) return
+  console.log(hunterId + ' has won')
+  players[hunterId]++
 
   console.log('SCORE:')
   console.log(players)
 
-  const entitiesToKeep = ['input', 'game-over']
-  Entity
-    .getAll()
-    .filter(({ id }) => !entitiesToKeep.includes(id))
-    .forEach(Entity.destroy)
+  isGameOvering = true
+  const { target_id } = Entity.get(hunterId)
+  const losingPlayer = Entity.get(target_id)
 
-  Game.getPhysicsEngine().world.gravity.y = 0
+  const {x, y} = losingPlayer.sprite.position
+  Entity.getByType('playerType').forEach((e) => { delete e.behaviors.gamepad })
+  Entity.getByType(immolationType).forEach(Entity.destroy)
+  
+  const { walkingAnimation } = player_templates.find(({ id }) => id === target_id)
+  const layingDownSprite = walkingAnimation[0]
+  
+  Entity.destroy(losingPlayer)
+  Entity.destroy(Entity.get(`${target_id}Burn`))
 
-  createBackground()
-  renderWinner(playerId)
+  Sound.getSound('sound/fail.wav', { volume: 1.6}).play()
 
-  setTimeout(() => battle(players), 5000)
+  deadLizard(x, y, layingDownSprite, () => {
+    const entitiesToKeep = ['input', 'game-over']
+    Entity
+      .getAll()
+      .filter(({ id }) => !entitiesToKeep.includes(id))
+      .forEach(Entity.destroy)
+  
+    Game.getPhysicsEngine().world.gravity.y = 0
+  
+    createBackground()
+    renderWinner(hunterId)
+    isGameOvering = false
+    setTimeout(() => battle(players), 5000)
+  })
 }

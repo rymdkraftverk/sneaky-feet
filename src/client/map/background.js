@@ -9,14 +9,6 @@ const createClouds = () => {
   sprite.scale.set(10)
 }
 
-const createLizzardDead = () => {
-  const entity = Entity.create('test-dead-lizard')
-  const sprite = Entity.addAnimation(entity, ['lizard-dead-1', 'lizard-dead-2'], 0.08)
-  sprite.x = 800
-  sprite.y = 420
-  sprite.scale.set(5)
-}
-
 const createTower = () => {
   const tower = Entity.create('tower-one')
   const sprite = Entity.addAnimation(
@@ -116,5 +108,4 @@ export default () => {
   createChurch()
   createTower()
   createSceneOverlay()
-  createLizzardDead()
 }

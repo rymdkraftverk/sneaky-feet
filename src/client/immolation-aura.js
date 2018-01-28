@@ -5,7 +5,7 @@ import follow from './behaviors/follow'
 import { updateHealth } from './health'
 import stalk from './behaviors/stalk'
 
-const immolationType = 'immolationType'
+export const immolationType = 'immolationType'
 const immolationIdPrefix = 'immolation '
 const radius = 80
 

@@ -3,37 +3,14 @@ import { open_ulti_door } from './map'
 
 const DELAY = 1000
 
-const createUltimatorOne = ({ x, y }) => {
-  const sprite = Entity.addSprite(entity, 'ultimator-1')
-  entity.behaviors.rotate = {
-    run: (b, e) => {
-      e.sprite.rotation -= 0.08
-      e.sprite.anchor.set(0.489)
-    },
-  }
-  sprite.x = x
-  sprite.y = y
-  sprite.scale.set(4.1)
-}
+const pickup = (a, b) => {
+  if(!(a && b)) return
+  a = a.entity
+  b = b.entity
 
-const createUltimatorTwo = ({ x, y }) => {
-  const entity = Entity.create('ultimator-2')
-  const sprite = Entity.addSprite(entity, 'ultimator-2')
-  entity.behaviors.rotate = {
-    run: (b, e) => {
-      e.sprite.rotation += 0.1
-      e.sprite.anchor.set(0.4885)
-    },
-  }
-  sprite.x = x
-  sprite.y = y
-  sprite.scale.set(4)
-}
-
-
-const createUltimator = ({ x, y }) => {
-  createUltimatorOne({ x, y })
-  createUltimatorTwo({ x, y })
+  console.log('PICKED UP 3!')
+  const ultimate = [a, b].find(x => x.id == 'ultimate')
+  Entity.destroy(ultimate)
 }
 
 export default pos => {
@@ -66,8 +43,16 @@ export default pos => {
     init: b => {
       Entity.addBody(e, Physics.Bodies.circle(pos.x, pos.y, 40, { isStatic: true }))
       b.sprite = s
+      Entity.addType(e, 'ultimate')
       b.countdown = Timer.create(DELAY)
       b.alive = false
+      b.sprite.visible = false
+
+      Entity.addCollision(
+        'ultimate',
+        ['playerType'],
+        pickup
+      )
     },
     run: b => {
       if (!b.alive && b.countdown.run()) {

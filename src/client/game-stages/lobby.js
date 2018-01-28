@@ -73,7 +73,7 @@ const createTitle = () => {
 
 const createLobbyContainer = (index, x, y) => {
   const entity = Entity.create(`lobby-container-${index}`)
-  const sprite = Entity.addAnimation(entity, ['lobby-container-no-player'], 0.2)
+  const sprite = Entity.addAnimation(entity, ['lobby-container-no-player'], 0.23)
   sprite.scale.set(8)
   sprite.position.x = x
   sprite.position.y = y
@@ -85,7 +85,7 @@ const createLobbyContainer = (index, x, y) => {
   aButtonSprite.scale.set(4)
 
   const pressToJoin = Entity.create(`pressToJoinText${index}`)
-  const pressToJoinText = Entity.addText(pressToJoin, 'Press A to Join ', small('gray'), { zIndex: 10 })
+  const pressToJoinText = Entity.addText(pressToJoin, 'Press A to Join ', small('#ddd'), { zIndex: 10 })
   pressToJoinText.position.x = x + 120
   pressToJoinText.position.y = y + 170
 }
@@ -98,7 +98,7 @@ const playerJoined = (index, x, y) => {
   startButtonSprite.scale.set(3)
 
   const pressToReady = Entity.create(`pressToReadyText${index}`)
-  const pressToReadyText = Entity.addText(pressToReady, 'Ready? Press Start!', small('gray'), { zIndex: 10 })
+  const pressToReadyText = Entity.addText(pressToReady, 'Ready? Press Start!', small('#ddd'), { zIndex: 10 })
   pressToReadyText.position.x = x + 80
   pressToReadyText.position.y = y + 20
 
@@ -111,7 +111,7 @@ const playerJoined = (index, x, y) => {
 
 const playerReady = (index, x, y) => {
   const ready = Entity.create(`ready${index}`)
-  const readyText = Entity.addText(ready, 'Ready!', big('gray'), { zIndex: 10 })
+  const readyText = Entity.addText(ready, 'Ready!', big('#ddd'), { zIndex: 10 })
   readyText.position.x = x + 100
   readyText.position.y = y - 50
   Sound.getSound('./sound/ready.wav', { volume: 0.4 }).play()

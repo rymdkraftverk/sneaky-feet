@@ -31,8 +31,7 @@ const getHunterId = (potentialHunterId, targetId) => {
   const potentialHunter = Entity
     .get(potentialHunterId)
 
-  if(potentialHunter.target_id == targetId)
-  {
+  if (potentialHunter.target_id == targetId) {
     return potentialHunter.id
   }
 
@@ -57,7 +56,7 @@ const knockBack = targetId => (obj1, obj2) => {
 
   const velocityUpdate = absoluteDistance < explosionRadius
     ? mult(forceDirection, forceFactor)
-    : {x: 0, y: 0}
+    : { x: 0, y: 0 }
 
   const velocity = add(hunter.body.velocity, velocityUpdate)
   Physics.Body.setVelocity(hunter.body, velocity)
@@ -74,7 +73,7 @@ const renderExplosion = position => {
       position.x,
       position.y,
       explosionRadius,
-      {isStatic: true, isSensor: true}
+      { isStatic: true, isSensor: true }
     )
 
   const explosion = Entity
@@ -84,6 +83,7 @@ const renderExplosion = position => {
     .addAnimation(explosion, explosionAnimation, 0.75, { zIndex: 100 })
 
   animation.scale.set(15)
+  animation.alpha = 0.4
 
   Entity.addBody(explosion, explosionBody)
   Sound.getSound('./sound/knockback.wav', { volume: 0.3 }).play()
@@ -91,10 +91,10 @@ const renderExplosion = position => {
   setTimeout(() => Entity.destroy(explosion), 200)
 }
 
-const createKnockBackProjectile = ({x, y}) => {
+const createKnockBackProjectile = ({ x, y }) => {
   const projectile = Entity.create(Math.random())
   const sprite = Entity.addSprite(projectile, spriteName)
-  Entity.addBody(projectile, Physics.Bodies.circle(x, y, 30, {isSensor: true}))
+  Entity.addBody(projectile, Physics.Bodies.circle(x, y, 30, { isSensor: true }))
   sprite.scale.set(1.5)
   sprite.anchor.y = 0.65
 
@@ -103,8 +103,8 @@ const createKnockBackProjectile = ({x, y}) => {
   return projectile
 }
 
-const fireKnockBack = (targetId, {x, y}) => {
-  const projectile = createKnockBackProjectile({x, y})
+const fireKnockBack = (targetId, { x, y }) => {
+  const projectile = createKnockBackProjectile({ x, y })
 
   Entity.addCollision(
     formatType(projectile),

@@ -6,6 +6,7 @@ import { createPlayer } from '../player'
 import { player_templates } from '../players'
 
 import battle from './battle'
+import lobby from './lobby'
 import deadLizard from '../deadLizard'
 import { immolationType } from '../immolation-aura'
 
@@ -101,7 +102,11 @@ export const gameOver = players => hunterId => () => {
     renderWinner(hunterId)
     renderLizards(players)
 
+    const nextStage = players[hunterId] < 3
+      ? battle
+      : lobby
+
     isGameOvering = false
-    setTimeout(() => battle(players), 5000)
+    setTimeout(() => nextStage(players), 5000)
   })
 }

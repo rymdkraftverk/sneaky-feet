@@ -24,6 +24,14 @@ const playersJoined = {
 }
 
 export default () => {
+  Entity
+    .getAll()
+    .filter(({ id }) => id !== 'input')
+    .forEach(Entity.destroy)
+
+  Entity
+    .removeAllCollisions()
+
   createBackground()
   createOverlay()
   createTitle()

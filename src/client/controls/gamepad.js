@@ -3,7 +3,7 @@ import { axes, buttons } from '../util/gamepad'
 
 const THRESHOLD = 0.2
 const WALKING_SPEED = 4
-const JUMPING_SPEED = -12
+const JUMPING_SPEED = -11
 
 const checkThreshold = (value) => {
   return (Math.abs(value) > THRESHOLD)
@@ -47,7 +47,7 @@ export default (id) => ({
     
     const getNewY = () => {
       if (!Gamepad.isPressed(id, buttons.lb) && e.onGround && (keyboardCheck(id) || Gamepad.isPressed(id, buttons.a))) {
-        return -11
+        return JUMPING_SPEED
       } else {
         return null
       }

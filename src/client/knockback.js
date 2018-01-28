@@ -10,7 +10,7 @@ const mult = Physics.Vector.mult
 const normalise = Physics.Vector.normalise
 const magnitude = Physics.Vector.magnitude
 
-const forceFactor = 25
+const forceFactor = 40
 const explosionRadius = 300
 
 const explosionAnimation = [

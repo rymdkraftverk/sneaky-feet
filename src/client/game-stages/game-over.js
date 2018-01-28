@@ -49,8 +49,8 @@ const renderScore = (score, lizardPos) => {
 
   for(let i = 0; i < 3; i++) {
     const spriteName = i < score
-      ? 'point-empty'
-      : 'point-won'
+      ? 'point-won'
+      : 'point-empty'
 
     renderPoint(spriteName, {x: position.x + i * 75, y: position.y})
   }

@@ -12,6 +12,8 @@ import { immolationType } from '../immolation-aura'
 
 let isGameOvering = false
 
+const WIN_LIMIT = 3
+
 const createBackground = () => {
   const entity = Entity.create('background')
   const sprite = Entity.addSprite(entity, 'background-lobby', { zIndex: -200 })
@@ -47,7 +49,7 @@ const renderLizards = score => {
 const renderScore = (score, lizardPos) => {
   const position = Physics.Vector.add(lizardPos, {x: -50, y: 50})
 
-  for(let i = 0; i < 3; i++) {
+  for(let i = 0; i < WIN_LIMIT; i++) {
     const spriteName = i < score
       ? 'point-won'
       : 'point-empty'
@@ -109,11 +111,11 @@ export const gameOver = players => hunterId => () => {
     renderWinner(hunterId)
     renderLizards(players)
 
-    const nextStage = players[hunterId] < 3
+    const nextStage = players[hunterId] < WIN_LIMIT
       ? battle
       : lobby
 
-    if(players[hunterId] >= 3) {
+    if(players[hunterId] >= WIN_LIMIT) {
       renderWinnerText()
     }
 

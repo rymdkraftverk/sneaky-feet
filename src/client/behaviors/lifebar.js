@@ -16,7 +16,7 @@ export default (parentSprite, width, height) => ({
     // Render life left
     const lifeToRenderWidth = (width / b.startingLife) * e.health.hp
     const gfx = Game.getGraphics()
-    gfx.beginFill(0x00ff00, 1)
+    gfx.beginFill(0x599602, 1)
     gfx.drawRect(x, y, lifeToRenderWidth, height)
 
     // Render life missing from total life

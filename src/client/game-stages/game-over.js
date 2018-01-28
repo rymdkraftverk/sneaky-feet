@@ -1,4 +1,5 @@
 // eslint-disable-next-line no-unused-vars
+import _ from 'lodash'
 import { Game, Entity, Timer, Key, Debug, Gamepad, Physics, Sound, Net, Text } from 'l1'
 
 import { createPlayer } from '../player'
@@ -25,6 +26,42 @@ const renderWinner = id => {
 
   createPlayer(id, {x: 750, y: 1000}, animation, 100)
 }
+
+const renderLizards = score => {
+  const playerIds = _.sortBy(Object.keys(score), x => x)
+  const sortedTemplates = _.sortBy(player_templates, player_template => player_template.id)
+  const positions = [
+    {x: 100, y: 200},
+    {x: 100, y: 800},
+    {x: 1500, y: 200},
+    {x: 1500, y: 800},
+  ]
+
+  _.zipWith(playerIds, sortedTemplates, positions, (id, template, pos) => {
+    createPlayer(id + ' display', pos, template.animation, 6)
+    renderScore(score[id], pos)
+  })
+}
+
+const renderScore = (score, lizardPos) => {
+  const position = Physics.Vector.add(lizardPos, {x: -50, y: 50})
+
+  for(let i = 0; i < 3; i++) {
+    const spriteName = i < score
+      ? 'point-empty'
+      : 'point-won'
+
+    renderPoint(spriteName, {x: position.x + i * 75, y: position.y})
+  }
+}
+
+const renderPoint = (spriteName, position) => {
+  const entity = Entity.create(Math.random())
+  const sprite = Entity.addSprite(entity, spriteName, { zIndex: 10} )
+  sprite.position = position
+  sprite.scale.set(4)
+}
+
 export const gameOver = players => hunterId => () => {
   if (isGameOvering) return
   console.log(hunterId + ' has won')
@@ -60,7 +97,10 @@ export const gameOver = players => hunterId => () => {
     Game.getPhysicsEngine().world.gravity.y = 0
   
     createBackground()
+
     renderWinner(hunterId)
+    renderLizards(players)
+
     isGameOvering = false
     setTimeout(() => battle(players), 5000)
   })
